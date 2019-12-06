@@ -18,6 +18,9 @@
     "url": "https://github.com/alexjeffburke/unexempted/issues"
   },
   "license": "MIT",
+  "dependencies": {
+    "unexpected": "~11.8.1"
+  },
   "devDependencies": {
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
@@ -29,7 +32,6 @@
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
-    "prettier": "~1.19.1",
-    "unexpected": "^11.8.1"
+    "prettier": "~1.19.1"
   }
 }
