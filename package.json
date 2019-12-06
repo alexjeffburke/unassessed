@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "main": "lib/unexempted.js",
+  "types": "lib/unexempted.d.ts",
   "scripts": {
+    "build": "./scripts/generateTypescriptDefinition.js ./lib/unexempted.d.ts",
     "coverage": "nyc mocha",
     "lint": "eslint . && prettier --check '**/*.js'",
     "test": "mocha"
