@@ -179,6 +179,14 @@ describe("unexempted", () => {
     ]);
   });
 
+  describe('"to be truthy"', () => {
+    it("should allow assertion", () => {
+      expect(() => {
+        unexempted("foo").toBeTruthy();
+      }, "not to throw");
+    });
+  });
+
   describe('"to equal"', () => {
     it("should allow assertion", () => {
       expect(() => {
