@@ -187,6 +187,14 @@ describe("unexempted", () => {
     });
   });
 
+  describe('"to be within"', () => {
+    it("should allow assertion", () => {
+      expect(() => {
+        unexempted(3).toBeWithin(2, 4);
+      }, "not to throw");
+    });
+  });
+
   describe('"to equal"', () => {
     it("should allow assertion", () => {
       expect(() => {
@@ -212,10 +220,18 @@ describe("unexempted", () => {
   });
 
   describe('"to have items satisfying"', () => {
-    it("should allow a nested assertion", () => {
+    it("should allow a nested singular value assertion", () => {
       expect(() => {
         unexempted(["foo", "it", "do"]).toHaveAnItemSatisfying(
           unexempted.it.toHaveLength(3)
+        );
+      }, "not to throw");
+    });
+
+    it("should allow a nested dual value assertion", () => {
+      expect(() => {
+        unexempted([1, 3, 5]).toHaveAnItemSatisfying(
+          unexempted.it.toBeWithin(2, 4)
         );
       }, "not to throw");
     });
