@@ -6,6 +6,15 @@ const path = require("path");
 const createCasedFunctions = require("../lib/createCasedFunctions");
 const prepareAssertions = require("../lib/prepareAssertions");
 
+const ASSERTIONS_TO_FORCE_NO_VALUE = {
+  "to be falsy": true,
+  "to be ok": true,
+  "to be truthy": true,
+  "not to be falsy": true,
+  "not to be ok": true,
+  "not to be truthy": true
+};
+
 const TYPE_NAMES_TO_EXCLUDE = {
   assertion: true,
   type: true,
@@ -42,7 +51,12 @@ function populateTempalate(expect) {
 
   const matchers = Object.keys(casedFunctions).map(key => {
     const assertionString = casedMap[key];
-    const originalAssertion = expect.assertions[assertionString];
+    let originalAssertion = expect.assertions[assertionString];
+
+    // TODO: remove this workaround when "to be ok" string value it removed
+    if (assertionString in ASSERTIONS_TO_FORCE_NO_VALUE) {
+      originalAssertion = [];
+    }
 
     const typesOfValues = [];
     originalAssertion.forEach(definition => {
