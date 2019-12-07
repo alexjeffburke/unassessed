@@ -11,7 +11,7 @@
     "build-cf": "./scripts/generateCasedFunctions.js ./lib/casedFunctions.js",
     "build-tests": "mkdirp build && buble -o build/test test",
     "coverage": "nyc mocha",
-    "lint": "eslint . && prettier --check '**/*.js'",
+    "lint": "npm run build && eslint . && prettier --check '**/*.js'",
     "test": "npm run build && mocha",
     "test-browser": "npm run bundle && npm run build-tests && karma start --single-run --browsers ${BROWSER:-ChromeHeadless}"
   },
