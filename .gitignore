@@ -5,6 +5,9 @@
 # Build
 /lib/casedFunctions.js
 /lib/unexempted.d.ts
+/unexempted.js
+/unexempted.js.map
+/unexempted.min.js
 
 # VS Code User Specific Settings
 /.vscode/settings.json
