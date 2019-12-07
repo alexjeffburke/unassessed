@@ -3,6 +3,7 @@
 /coverage
 
 # Build
+/build
 /lib/casedFunctions.js
 /lib/unexempted.d.ts
 /unexempted.js

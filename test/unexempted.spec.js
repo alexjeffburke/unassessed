@@ -1,5 +1,8 @@
-const expect = require("unexpected");
-const unexempted = require("../lib/unexempted");
+/* global expect:false, weknowhow:false */
+const unexempted =
+  typeof weknowhow !== "undefined"
+    ? window.unexempted
+    : require("../lib/unexempted");
 
 describe("unexempted", () => {
   it("should be a function", () => {
