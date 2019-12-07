@@ -44,26 +44,41 @@ function populateTempalate(expect) {
     const assertionString = casedMap[key];
     const originalAssertion = expect.assertions[assertionString];
 
-    const typesOfValue = new Set();
+    const typesOfValues = [];
     originalAssertion.forEach(definition => {
-      const valueMatch = definition.declaration.match(
-        /<([a-zA-z-]+[?]?(?:[|][a-zA-z-]+)*)>$/
+      const valueMatches = definition.declaration.match(
+        /(?: <([a-zA-z-]+[?]?(?:[|][a-zA-z-]+)*)>)* <([a-zA-z-]+[?]?(?:[|][a-zA-z-]+)*)>$/
       );
-      if (valueMatch) {
-        valueMatch[1].split("|").map(type => typesOfValue.add(type));
+      if (valueMatches) {
+        const validMatches = valueMatches.slice(1).filter(Boolean);
+        validMatches.forEach((valueMatch, index) => {
+          if (!valueMatch) return;
+          let typeOfValue;
+          if (typesOfValues.length <= index) {
+            typeOfValue = new Set();
+            typesOfValues.push(typeOfValue);
+          } else {
+            typeOfValue = typesOfValues[index];
+          }
+          valueMatch.split("|").map(type => typeOfValue.add(type));
+        });
       }
     });
-    if (typesOfValue.size === 0) {
+    if (typesOfValues.length === 0) {
       return `${key}(): Result`;
     }
 
-    const typesArray = Array.from(typesOfValue);
-    const typesString = typesArray
-      .map(convertTypeIfRequired)
-      .filter(Boolean)
-      .join("|");
-    const isOptional = typesArray.some(str => isLastChr(str, "?"));
-    return `${key}(value${isOptional ? "?" : ""}: ${typesString}): Result`;
+    const valueTypes = typesOfValues.map((typesOfValue, index) => {
+      const typesArray = Array.from(typesOfValue);
+      const typesString = typesArray
+        .map(convertTypeIfRequired)
+        .filter(Boolean)
+        .join("|");
+      const valueId = index === 0 ? "" : String(index + 1);
+      const isOptional = typesArray.some(str => isLastChr(str, "?"));
+      return `value${valueId}${isOptional ? "?" : ""}: ${typesString}`;
+    });
+    return `${key}(${valueTypes.join(", ")}): Result`;
   });
 
   const matcherString = matchers.join("\n    ");
