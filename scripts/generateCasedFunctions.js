@@ -4,8 +4,8 @@ const fs = require("fs");
 const path = require("path");
 const prettier = require("prettier");
 
-const createCasedFunctions = require("../lib/createCasedFunctions");
-const prepareAssertions = require("../lib/prepareAssertions");
+const createCasedFunctions = require("../src/createCasedFunctions");
+const prepareAssertions = require("../src/prepareAssertions");
 
 function prepareFunctions(expect) {
   const assertions = prepareAssertions(expect);

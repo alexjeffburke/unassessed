@@ -3,8 +3,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const createCasedFunctions = require("../lib/createCasedFunctions");
-const prepareAssertions = require("../lib/prepareAssertions");
+const createCasedFunctions = require("../src/createCasedFunctions");
+const prepareAssertions = require("../src/prepareAssertions");
 
 const TYPE_NAMES_TO_EXCLUDE = {
   assertion: true,
