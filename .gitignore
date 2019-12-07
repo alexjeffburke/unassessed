@@ -3,6 +3,7 @@
 /coverage
 
 # Build
+/lib/casedFunctions.js
 /lib/unexempted.d.ts
 
 # VS Code User Specific Settings
