@@ -8,10 +8,8 @@ const prepareAssertions = require("../lib/prepareAssertions");
 
 const ASSERTIONS_TO_FORCE_NO_VALUE = {
   "to be falsy": true,
-  "to be ok": true,
   "to be truthy": true,
   "not to be falsy": true,
-  "not to be ok": true,
   "not to be truthy": true
 };
 

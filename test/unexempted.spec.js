@@ -10,9 +10,7 @@ describe("unexempted", () => {
     const partialExpect = unexempted(undefined);
 
     expect(Object.keys(partialExpect), "to equal", [
-      "notToBeOk",
       "notToBeTruthy",
-      "toBeOk",
       "toBeTruthy",
       "notToBe",
       "toBe",
