@@ -412,4 +412,20 @@ describe("unexempted", () => {
       }, "not to throw");
     });
   });
+
+  describe("when using nested assertions", () => {
+    it("should throw if the function does not terminate the chain", () => {
+      expect(
+        () => {
+          unexempted([[1, 3, 5]]).toHaveAnItemSatisfying(
+            unexempted.it.toHaveAnItemSatisfying(
+              unexempted.it.toHaveAnItemSatisfying()
+            )
+          );
+        },
+        "to throw",
+        "Nested assertions are not supported with .it. functions."
+      );
+    });
+  });
 });
