@@ -427,5 +427,17 @@ describe("unexempted", () => {
         "Nested assertions are not supported with .it. functions."
       );
     });
+
+    it("should render a nice diff", () => {
+      expect(
+        () => {
+          unexempted(["so", "it", "do"]).toHaveAnItemSatisfying(
+            unexempted.it.toHaveLength(3)
+          );
+        },
+        "to throw",
+        "expected [ 'so', 'it', 'do' ] to have an item satisfying to have length 3"
+      );
+    });
   });
 });

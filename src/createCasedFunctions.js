@@ -12,7 +12,7 @@ function createCasedFunction(
 
   if (typesOfValues.length === 2) {
     return (subject, value, value2) => {
-      if (value.__itFunction || value2.__itFunction) {
+      if (value.__itPlaceholder || value2.__itPlaceholder) {
         throw new Error(
           `Nested assertions are not supported by .${__camelCasedString__}()`
         );
@@ -23,7 +23,7 @@ function createCasedFunction(
   }
 
   return (subject, value) => {
-    if (value.__itFunction) {
+    if (value.__itPlaceholder) {
       throw new Error(
         `Nested assertions are not supported by .${__camelCasedString__}()`
       );
@@ -34,7 +34,14 @@ function createCasedFunction(
 }
 
 function createCasedFunctionOpen(expect, __assertionString__) {
-  return (subject, value) => {
+  return (subject, valueOrItPlaceholder) => {
+    let value = valueOrItPlaceholder;
+    if (value.__itPlaceholder) {
+      const { assertion, args } = valueOrItPlaceholder;
+      value = expect.it(thing => expect(thing, assertion, ...args));
+      value.__itReference = valueOrItPlaceholder;
+    }
+
     return expect(subject, __assertionString__, value);
   };
 }
