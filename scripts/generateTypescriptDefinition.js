@@ -5,6 +5,7 @@ const path = require("path");
 
 const createCasedFunctions = require("../src/createCasedFunctions");
 const prepareAssertions = require("../src/prepareAssertions");
+const processUnexpectedInstance = require("../src/processUnexpectedInstance");
 
 const TYPE_NAMES_TO_EXCLUDE = {
   assertion: true,
@@ -38,10 +39,11 @@ function convertTypeIfRequired(typeName) {
 
 function populateTempalate(expect) {
   const assertions = prepareAssertions(expect);
-  const { casedFunctions, casedMap } = createCasedFunctions(expect, assertions);
+  const casedDefinitions = processUnexpectedInstance(expect, assertions);
+  const casedFunctions = createCasedFunctions(expect, casedDefinitions);
 
   const matchers = Object.keys(casedFunctions).map(key => {
-    const { typesOfValues } = casedMap[key];
+    const { typesOfValues } = casedDefinitions[key];
 
     if (typesOfValues.length === 0) {
       return `${key}(): Result`;

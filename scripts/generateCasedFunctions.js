@@ -6,13 +6,15 @@ const prettier = require("prettier");
 
 const createCasedFunctions = require("../src/createCasedFunctions");
 const prepareAssertions = require("../src/prepareAssertions");
+const processUnexpectedInstance = require("../src/processUnexpectedInstance");
 
 function prepareFunctions(expect) {
   const assertions = prepareAssertions(expect);
-  const { casedFunctions, casedMap } = createCasedFunctions(expect, assertions);
+  const casedDefinitions = processUnexpectedInstance(expect, assertions);
+  const casedFunctions = createCasedFunctions(expect, casedDefinitions);
 
   const functions = Object.keys(casedFunctions).map(key => {
-    const { assertionString } = casedMap[key];
+    const { assertionString } = casedDefinitions[key];
     let fnString = casedFunctions[key].toString();
     // eslint-disable-next-line no-template-curly-in-string
     fnString = fnString.replace("${__camelCasedString__}", key);
