@@ -24,12 +24,7 @@ function upperCaseFirst(string) {
 }
 
 function determineTypesOfValues(expect, assertionString) {
-  let originalAssertion = expect.assertions[assertionString];
-
-  // TODO: remove this workaround when "to be ok" string value it removed
-  if (assertionString in ASSERTIONS_TO_FORCE_NO_VALUE) {
-    originalAssertion = [];
-  }
+  const originalAssertion = expect.assertions[assertionString];
 
   const typesOfValues = [];
   originalAssertion.forEach(definition => {
@@ -51,7 +46,6 @@ function determineTypesOfValues(expect, assertionString) {
       });
     }
   });
-
   return typesOfValues;
 }
 
@@ -88,7 +82,11 @@ function processUnexpectedInstance(expect, assertions) {
         .slice(1)
         .map(upperCaseFirst)
         .join("");
-    const typesOfValues = determineTypesOfValues(expect, assertionString);
+
+    const typesOfValues =
+      assertionString in ASSERTIONS_TO_FORCE_NO_VALUE
+        ? [] // TODO: remove this workaround when "to be ok" string value is removed
+        : determineTypesOfValues(expect, assertionString);
 
     if (
       casedDefinitions[camelCasedString] &&
