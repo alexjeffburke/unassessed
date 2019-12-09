@@ -6,7 +6,7 @@ describe("src/prepareAssertions", () => {
   it("should list the expected assertions", () => {
     const prepared = prepareAssertions(expect);
 
-    expect(prepared, "to only have keys", [
+    expect(Object.keys(prepared), "to equal", [
       "not to be ok",
       "not to be truthy",
       "to be ok",
@@ -167,12 +167,8 @@ describe("src/prepareAssertions", () => {
       "to exhaustively satisfy",
       "when decoded as",
       "decoded as",
-      "not to exhaustively satisfy assertion",
       "not to exhaustively satisfy",
-      "not to satisfy assertion",
       "not to satisfy",
-      "to exhaustively satisfy assertion",
-      "to satisfy assertion",
       "when called with",
       "called with",
       "when called",
@@ -207,55 +203,58 @@ describe("src/prepareAssertions", () => {
       "when fulfilled",
       "to call the callback",
       "to call the callback without error",
-      "to call the callback with error",
-      "to have values exhaustively satisfying assertion",
-      "to have values satisfying assertion",
-      "to be a map whose values exhaustively satisfy assertion",
-      "to be a map whose values satisfy assertion",
-      "to be a hash whose values exhaustively satisfy assertion",
-      "to be a hash whose values satisfy assertion",
-      "to be an object whose values exhaustively satisfy assertion",
-      "to be an object whose values satisfy assertion",
-      "to have items exhaustively satisfying assertion",
-      "to have items satisfying assertion",
-      "to be an array whose items exhaustively satisfy assertion",
-      "to be an array whose items satisfy assertion",
-      "to have keys satisfying assertion",
-      "to be a map whose keys satisfy assertion",
-      "to be a map whose properties satisfy assertion",
-      "to be a hash whose keys satisfy assertion",
-      "to be a hash whose properties satisfy assertion",
-      "to be an object whose keys satisfy assertion",
-      "to be an object whose properties satisfy assertion",
-      "not to have a value exhaustively satisfying assertion",
-      "not to have a value satisfying assertion",
-      "to have a value exhaustively satisfying assertion",
-      "to have a value satisfying assertion",
-      "not to have an item exhaustively satisfying assertion",
-      "not to have an item satisfying assertion",
-      "to have an item exhaustively satisfying assertion",
-      "to have an item satisfying assertion",
-      "when rejected assertion",
-      "when fulfilled assertion"
+      "to call the callback with error"
     ]);
+  });
+
+  it("should not have duplicates when the assertion suffix is discarded", () => {
+    const prepared = prepareAssertions(expect);
+
+    const seenAssertions = [];
+    const seenDuplicates = [];
+
+    Object.keys(prepared).forEach(assertionString => {
+      if (assertionString.endsWith(" assertion")) {
+        assertionString = assertionString.slice(0, -" assertion".length);
+      }
+
+      if (!seenAssertions[assertionString]) {
+        seenAssertions[assertionString] = true;
+      } else {
+        seenDuplicates.push(assertionString);
+      }
+    });
+
+    expect.withError(
+      () => {
+        expect(seenDuplicates, "to be empty");
+      },
+      () => {
+        expect.fail(
+          `The following assertions were duplicated:\n${seenDuplicates.join(
+            ",\n"
+          )}`
+        );
+      }
+    );
   });
 
   describe('when processing "to satisfy"', () => {
     it("should contain a definition with the suffix", () => {
       const prepared = prepareAssertions(expect);
 
-      expect(prepared, "to have property", "to satisfy assertion");
+      expect(prepared, "to have property", "to satisfy");
     });
 
-    it.skip("should not contain a definition without the suffix", () => {
+    it("should not contain a definition without the suffix", () => {
       const prepared = prepareAssertions(expect);
 
-      expect(prepared, "not to have property", "to satisfy");
+      expect(prepared, "not to have property", "to satisfy assertion");
     });
 
-    it.skip("should contain the correct number of definitions", () => {
+    it("should contain the correct number of definitions", () => {
       const prepared = prepareAssertions(expect);
-      const definitions = prepared["to satisfy assertion"];
+      const definitions = prepared["to satisfy"];
 
       expect(definitions.length, "to be greater than", 5);
     });

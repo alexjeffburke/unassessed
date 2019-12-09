@@ -15,10 +15,6 @@ const ASSERTIONS_TO_FORCE_NO_VALUE = {
   "not to be truthy": true
 };
 
-function last(arr) {
-  return arr[arr.length - 1];
-}
-
 function upperCaseFirst(string) {
   return string[0].toUpperCase() + string.slice(1);
 }
@@ -69,13 +65,6 @@ function processUnexpectedInstance(expect, assertions) {
       return;
     }
 
-    let isNestingAllowed = false;
-    if (last(assertionTokens) === "assertion") {
-      assertionTokens.pop();
-      assertionString = assertionTokens.join(" ");
-      isNestingAllowed = true;
-    }
-
     const camelCasedString =
       assertionOpener +
       assertionTokens
@@ -95,6 +84,14 @@ function processUnexpectedInstance(expect, assertions) {
       // avoid overwriting any assertion where nesting was enabled
       return;
     }
+
+    // check whether the assertion allows a something to be nested
+    // on the RHS - is so, mark it so we generate the correct checks
+    const maybeNested =
+      typesOfValues.length > 0 &&
+      typesOfValues.find(valueTypes => valueTypes.has("assertion"));
+
+    const isNestingAllowed = maybeNested ? maybeNested.size > 1 : false;
 
     // record all information derived for the assertion
     casedDefinitions[camelCasedString] = {
