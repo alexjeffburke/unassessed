@@ -246,5 +246,18 @@ describe("src/prepareAssertions", () => {
 
       expect(prepared, "to have property", "to satisfy assertion");
     });
+
+    it.skip("should not contain a definition without the suffix", () => {
+      const prepared = prepareAssertions(expect);
+
+      expect(prepared, "not to have property", "to satisfy");
+    });
+
+    it.skip("should contain the correct number of definitions", () => {
+      const prepared = prepareAssertions(expect);
+      const definitions = prepared["to satisfy assertion"];
+
+      expect(definitions.length, "to be greater than", 5);
+    });
   });
 });
