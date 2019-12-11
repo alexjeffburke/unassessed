@@ -12,9 +12,9 @@
     "build-tests": "mkdirp build && buble -o build/test test",
     "coverage": "npm run build && nyc --exclude lib/casedFunctions.js --reporter lcov --reporter text npm run test-node",
     "lint": "npm run build && eslint . && prettier --check '**/*.js'",
-    "test": "npm run build && npm run test-node && npm run test-browser",
+    "test": "npm run test-node && npm run test-browser",
     "test-browser": "npm run bundle && npm run build-tests && karma start --single-run --browsers ${BROWSER:-ChromeHeadless}",
-    "test-node": "mocha"
+    "test-node": "npm run build && mocha"
   },
   "keywords": [],
   "author": "Alex J Burke <alex@alexjeffburke.com>",
