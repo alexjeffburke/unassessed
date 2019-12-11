@@ -12,6 +12,9 @@ describe("unexempted", () => {
   it("should support assertions", () => {
     const partialExpect = unexempted(undefined);
 
+    // complete assertion to avoid afterEach() hook
+    partialExpect.toBeUndefined();
+
     expect(Object.keys(partialExpect), "to equal", [
       "notToBeTruthy",
       "toBeTruthy",
