@@ -10,8 +10,8 @@ module.exports = [
   {
     input: pkg.main,
     output: {
-      file: "unexempted.js",
-      name: "unexempted",
+      file: "unassessed.js",
+      name: "unassessed",
       exports: "default",
       format: "umd",
       sourcemap: true,
@@ -22,8 +22,8 @@ module.exports = [
   {
     input: pkg.main,
     output: {
-      file: "unexempted.min.js",
-      name: "unexempted",
+      file: "unassessed.min.js",
+      name: "unassessed",
       exports: "default",
       format: "umd",
       sourcemap: false,

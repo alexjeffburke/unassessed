@@ -1,12 +1,11 @@
-export = unexempted;
+export = unassessed;
 
-declare const unexempted: unexempted.Expect;
+declare const unassessed: unassessed.Assess;
 
-declare namespace unexempted {
-  interface Expect {
+declare namespace unassessed {
+  interface Assess {
     /**
-     * The `expect` function is used every time you want to test a value.
-     * You will rarely call `expect` by itself.
+     * The `access` function is called to wrap a subject to assert against.
      *
      * @param subject What we will assert against.
      */

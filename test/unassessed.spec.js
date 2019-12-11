@@ -1,16 +1,16 @@
 /* global expect:false, weknowhow:false */
-const unexempted =
+const assess =
   typeof weknowhow !== "undefined"
-    ? window.unexempted
-    : require("../lib/unexempted");
+    ? window.unassessed
+    : require("../lib/unassessed");
 
-describe("unexempted", () => {
+describe("unassessed", () => {
   it("should be a function", () => {
-    expect(unexempted, "to be a function");
+    expect(assess, "to be a function");
   });
 
   it("should support assertions", () => {
-    const partialExpect = unexempted(undefined);
+    const partialExpect = assess(undefined);
 
     // complete assertion to avoid afterEach() hook
     partialExpect.toBeUndefined();
@@ -186,7 +186,7 @@ describe("unexempted", () => {
   });
 
   it("should support .it.", () => {
-    const functions = unexempted.it;
+    const functions = assess.it;
 
     expect(Object.keys(functions), "to equal", [
       "notToBeTruthy",
@@ -361,7 +361,7 @@ describe("unexempted", () => {
   describe('"to be truthy"', () => {
     it("should allow assertion", () => {
       expect(() => {
-        unexempted("foo").toBeTruthy();
+        assess("foo").toBeTruthy();
       }, "not to throw");
     });
   });
@@ -369,7 +369,7 @@ describe("unexempted", () => {
   describe('"to be within"', () => {
     it("should allow assertion", () => {
       expect(() => {
-        unexempted(3).toBeWithin(2, 4);
+        assess(3).toBeWithin(2, 4);
       }, "not to throw");
     });
   });
@@ -377,20 +377,20 @@ describe("unexempted", () => {
   describe('"to equal"', () => {
     it("should allow assertion", () => {
       expect(() => {
-        unexempted("foo").toEqual("foo");
+        assess("foo").toEqual("foo");
       }, "not to throw");
     });
 
     it("should allow negated assertion", () => {
       expect(() => {
-        unexempted("foo").notToEqual("bar");
+        assess("foo").notToEqual("bar");
       }, "not to throw");
     });
 
     it("should now allow a nested assertion", () => {
       expect(
         () => {
-          unexempted("foo").notToEqual(unexempted.it.toEqual("foo"));
+          assess("foo").notToEqual(assess.it.toEqual("foo"));
         },
         "to throw",
         "Nested assertions are not supported by .notToEqual()"
@@ -401,17 +401,15 @@ describe("unexempted", () => {
   describe('"to have items satisfying"', () => {
     it("should allow a nested singular value assertion", () => {
       expect(() => {
-        unexempted(["foo", "it", "do"]).toHaveAnItemSatisfying(
-          unexempted.it.toHaveLength(3)
+        assess(["foo", "it", "do"]).toHaveAnItemSatisfying(
+          assess.it.toHaveLength(3)
         );
       }, "not to throw");
     });
 
     it("should allow a nested dual value assertion", () => {
       expect(() => {
-        unexempted([1, 3, 5]).toHaveAnItemSatisfying(
-          unexempted.it.toBeWithin(2, 4)
-        );
+        assess([1, 3, 5]).toHaveAnItemSatisfying(assess.it.toBeWithin(2, 4));
       }, "not to throw");
     });
   });
@@ -420,10 +418,8 @@ describe("unexempted", () => {
     it("should throw if the function does not terminate the chain", () => {
       expect(
         () => {
-          unexempted([[1, 3, 5]]).toHaveAnItemSatisfying(
-            unexempted.it.toHaveAnItemSatisfying(
-              unexempted.it.toHaveAnItemSatisfying()
-            )
+          assess([[1, 3, 5]]).toHaveAnItemSatisfying(
+            assess.it.toHaveAnItemSatisfying(assess.it.toHaveAnItemSatisfying())
           );
         },
         "to throw",
@@ -434,8 +430,8 @@ describe("unexempted", () => {
     it("should render a nice diff", () => {
       expect(
         () => {
-          unexempted(["so", "it", "do"]).toHaveAnItemSatisfying(
-            unexempted.it.toHaveLength(3)
+          assess(["so", "it", "do"]).toHaveAnItemSatisfying(
+            assess.it.toHaveLength(3)
           );
         },
         "to throw",

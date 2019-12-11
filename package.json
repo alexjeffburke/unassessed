@@ -1,13 +1,13 @@
 {
-  "name": "unexempted",
+  "name": "unassessed",
   "version": "0.0.0",
   "description": "",
-  "main": "lib/unexempted.js",
-  "types": "lib/unexempted.d.ts",
+  "main": "lib/unassessed.js",
+  "types": "lib/unassessed.d.ts",
   "scripts": {
     "bundle": "npm run build && rollup -c",
     "build": "npm run build-cf && npm run build-dts",
-    "build-dts": "./scripts/generateTypescriptDefinition.js ./lib/unexempted.d.ts",
+    "build-dts": "./scripts/generateTypescriptDefinition.js ./lib/unassessed.d.ts",
     "build-cf": "./scripts/generateCasedFunctions.js ./lib/casedFunctions.js",
     "build-tests": "mkdirp build && buble -o build/test test",
     "coverage": "npm run build && nyc --exclude lib/casedFunctions.js --reporter lcov --reporter text npm run test-node",
@@ -20,10 +20,10 @@
   "author": "Alex J Burke <alex@alexjeffburke.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexjeffburke/unexempted.git"
+    "url": "https://github.com/alexjeffburke/unassessed.git"
   },
   "bugs": {
-    "url": "https://github.com/alexjeffburke/unexempted/issues"
+    "url": "https://github.com/alexjeffburke/unassessed/issues"
   },
   "license": "MIT",
   "dependencies": {

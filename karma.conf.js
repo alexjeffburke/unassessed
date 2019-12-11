@@ -4,9 +4,9 @@ module.exports = function(config) {
 
     files: [
       "./node_modules/unexpected/unexpected.js",
-      "./unexempted.js",
+      "./unassessed.js",
       "./test/common/browser.js",
-      "./build/test/unexempted.spec.js"
+      "./build/test/unassessed.spec.js"
     ],
 
     client: {
@@ -21,8 +21,8 @@ module.exports = function(config) {
       project:
         process.env.TRAVIS_BRANCH === "master" &&
         !process.env.TRAVIS_PULL_REQUEST_BRANCH // Catch Travis "PR" builds
-          ? "unexempted"
-          : "unexempted-dev"
+          ? "unassessed"
+          : "unassessed-dev"
     },
 
     browsers: ["ChromeHeadless", "ie11"],

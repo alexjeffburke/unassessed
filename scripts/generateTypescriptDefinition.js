@@ -22,7 +22,7 @@ const TYPE_NAMES_TO_MAP = {
 };
 
 const interfaceTemplate = fs.readFileSync(
-  path.join(__dirname, "..", "templates", "unexempted.d.ts"),
+  path.join(__dirname, "..", "templates", "unassessed.d.ts"),
   "utf8"
 );
 

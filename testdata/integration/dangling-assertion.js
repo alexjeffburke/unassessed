@@ -1,7 +1,7 @@
-const unexempted = require("../../lib/unexempted");
+const assess = require("../../lib/unassessed");
 
 describe("dangling-assertion", () => {
   it("should be identified", () => {
-    unexempted();
+    assess();
   });
 });
