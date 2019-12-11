@@ -86,7 +86,7 @@ describe("src/createCasedFunctions", () => {
           toSomething("foo", nestedAssertion);
         },
         "to throw",
-        "Nested assertions are not supported by .toSomething()"
+        "unassessed: nested assertions are not supported by .toSomething()"
       );
     });
   });
@@ -139,7 +139,7 @@ describe("src/createCasedFunctions", () => {
           toSomething("foo", "bar", nestedAssertion);
         },
         "to throw",
-        "Nested assertions are not supported by .toSomething()"
+        "unassessed: nested assertions are not supported by .toSomething()"
       );
     });
   });

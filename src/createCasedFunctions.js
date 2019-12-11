@@ -14,7 +14,7 @@ function createCasedFunction(
     return (subject, value, value2) => {
       if (value.__itPlaceholder || value2.__itPlaceholder) {
         throw new Error(
-          `Nested assertions are not supported by .${__camelCasedString__}()`
+          `unassessed: nested assertions are not supported by .${__camelCasedString__}()`
         );
       }
 
@@ -25,7 +25,7 @@ function createCasedFunction(
   return (subject, value) => {
     if (value.__itPlaceholder) {
       throw new Error(
-        `Nested assertions are not supported by .${__camelCasedString__}()`
+        `unassessed: nested assertions are not supported by .${__camelCasedString__}()`
       );
     }
 

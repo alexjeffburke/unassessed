@@ -393,7 +393,7 @@ describe("unassessed", () => {
           assess("foo").notToEqual(assess.it.toEqual("foo"));
         },
         "to throw",
-        "Nested assertions are not supported by .notToEqual()"
+        "unassessed: nested assertions are not supported by .notToEqual()"
       );
     });
   });
@@ -423,7 +423,7 @@ describe("unassessed", () => {
           );
         },
         "to throw",
-        "Nested assertions are not supported with .it. functions."
+        "unassessed: nested assertions are not supported with .it. functions."
       );
     });
 
