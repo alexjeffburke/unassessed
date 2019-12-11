@@ -12,8 +12,9 @@
     "build-tests": "mkdirp build && buble -o build/test test",
     "coverage": "nyc mocha",
     "lint": "npm run build && eslint . && prettier --check '**/*.js'",
-    "test": "npm run build && mocha",
-    "test-browser": "npm run bundle && npm run build-tests && karma start --single-run --browsers ${BROWSER:-ChromeHeadless}"
+    "test": "npm run build && npm run test-node && npm run test-browser",
+    "test-browser": "npm run bundle && npm run build-tests && karma start --single-run --browsers ${BROWSER:-ChromeHeadless}",
+    "test-node": "mocha"
   },
   "keywords": [],
   "author": "Alex J Burke <alex@alexjeffburke.com>",
