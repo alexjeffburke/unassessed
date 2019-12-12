@@ -68,4 +68,57 @@ describe("plugins/dom", () => {
       "parsedAsXML"
     ]);
   });
+
+  it("should expose .it. functions defined by the plugin", () => {
+    const keys = Object.keys(assessWithDom.it);
+    const assessWithDomKeys = keys.slice(
+      // every index after the last core assertion
+      keys.indexOf("toCallTheCallbackWithError") + 1
+    );
+
+    expect(assessWithDomKeys, "to equal", [
+      "toHaveClass",
+      "toHaveClasses",
+      "toOnlyHaveClass",
+      "toOnlyHaveClasses",
+      "notToHaveClass",
+      "notToHaveClasses",
+      "toOnlyHaveAttribute",
+      "toOnlyHaveAttributes",
+      "toHaveAttribute",
+      "toHaveAttributes",
+      "notToHaveAttribute",
+      "notToHaveAttributes",
+      "toHaveNoChild",
+      "toHaveNoChildren",
+      "toHaveChild",
+      "toHaveChildren",
+      "toHaveText",
+      "whenQueriedForFirst",
+      "whenQueriedFor",
+      "queriedForFirst",
+      "queriedFor",
+      "whenQueriedForTestId",
+      "queriedForTestId",
+      "toContainNoElementsMatching",
+      "toContainElementsMatching",
+      "notToContainElementsMatching",
+      "notToContainTestId",
+      "toContainTestId",
+      "notToHaveTestId",
+      "toHaveTestId",
+      "whenParsedAsHtmlFragment",
+      "whenParsedAsHtml",
+      "whenParsedAsHTMLFragment",
+      "whenParsedAsHTML",
+      "parsedAsHtmlFragment",
+      "parsedAsHtml",
+      "parsedAsHTMLFragment",
+      "parsedAsHTML",
+      "whenParsedAsXml",
+      "whenParsedAsXML",
+      "parsedAsXml",
+      "parsedAsXML"
+    ]);
+  });
 });
