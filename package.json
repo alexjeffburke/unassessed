@@ -53,6 +53,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",
     "sinon": "^7.5.0",
+    "unexpected-dom": "^4.16.0",
     "unexpected-sinon": "^10.11.2"
   }
 }
