@@ -11,6 +11,8 @@ declare namespace unassessed {
      */
     <T = any>(subject: T): Matchers;
 
+    fromInstance(expect: object): Assess;
+
     it: Matchers;
   }
 
