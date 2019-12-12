@@ -41,13 +41,31 @@ describe("plugins/dom", () => {
       "toHaveChild",
       "toHaveChildren",
       "toHaveText",
+      "whenQueriedForFirst",
+      "whenQueriedFor",
+      "queriedForFirst",
+      "queriedFor",
+      "whenQueriedForTestId",
+      "queriedForTestId",
       "toContainNoElementsMatching",
       "toContainElementsMatching",
       "notToContainElementsMatching",
       "notToContainTestId",
       "toContainTestId",
       "notToHaveTestId",
-      "toHaveTestId"
+      "toHaveTestId",
+      "whenParsedAsHtmlFragment",
+      "whenParsedAsHtml",
+      "whenParsedAsHTMLFragment",
+      "whenParsedAsHTML",
+      "parsedAsHtmlFragment",
+      "parsedAsHtml",
+      "parsedAsHTMLFragment",
+      "parsedAsHTML",
+      "whenParsedAsXml",
+      "whenParsedAsXML",
+      "parsedAsXml",
+      "parsedAsXML"
     ]);
   });
 });
