@@ -89,9 +89,10 @@ function processUnexpectedInstance(expect, assertions) {
     // on the RHS - is so, mark it so we generate the correct checks
     const maybeNested =
       typesOfValues.length > 0 &&
-      typesOfValues.find(valueTypes => valueTypes.has("assertion"));
+      typesOfValues[typesOfValues.length - 1].has("assertion");
 
-    const isNestingAllowed = maybeNested ? maybeNested.size > 1 : false;
+    const lastTypesSet = maybeNested && typesOfValues[typesOfValues.length - 1];
+    const isNestingAllowed = maybeNested && lastTypesSet.size > 1;
 
     // record all information derived for the assertion
     casedDefinitions[camelCasedString] = {
