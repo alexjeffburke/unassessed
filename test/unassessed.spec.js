@@ -9,6 +9,16 @@ describe("unassessed", () => {
     expect(assess, "to be a function");
   });
 
+  it("should throw if given more than one argument", () => {
+    expect(
+      () => {
+        assess(undefined, undefined);
+      },
+      "to throw",
+      "unassessed: at most one subject argument accepted"
+    );
+  });
+
   it("should support assertions", () => {
     const partialExpect = assess(undefined);
 
