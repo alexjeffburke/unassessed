@@ -1,9 +1,30 @@
-const ALLOWED_OPENERS = {
-  to: true,
-  not: true
-};
-
 const ASSERTIONS_TO_EXCLUDE = {
+  called: true,
+  "when called": true,
+  "called with": true,
+  "when called with": true,
+  "decoded as": true,
+  "when decoded as": true,
+  "passed as parameter to": true,
+  "when passed as parameter to": true,
+  "passed as parameters to": true,
+  "when passed as parameters to": true,
+  "passed as parameter to async": true,
+  "when passed as parameter to async": true,
+  "passed as parameters to async": true,
+  "passed as parameter to constructor": true,
+  "when passed as parameter to constructor": true,
+  "when passed as parameters to async": true,
+  "passed as parameters to constructor": true,
+  "when passed as parameters to constructor": true,
+  sorted: true,
+  "when sorted": true,
+  "sorted by": true,
+  "when sorted by": true,
+  "sorted numerically": true,
+  "when sorted numerically": true,
+  "when fulfilled": true,
+  "when rejected": true,
   "to be ok": true,
   "not to be ok": true
 };
@@ -51,10 +72,6 @@ function processUnexpectedInstance(expect, assertions) {
   Object.keys(assertions).forEach(assertionString => {
     const assertionTokens = assertionString.split(" ");
     const assertionOpener = assertionTokens[0];
-
-    if (!(assertionOpener in ALLOWED_OPENERS)) {
-      return;
-    }
 
     if (assertionString in ASSERTIONS_TO_EXCLUDE) {
       return;
