@@ -200,33 +200,7 @@ describe("src/createCasedFunctions", () => {
         expect(fakeExpect, "to have a call exhaustively satisfying", [
           "foo",
           "the assertion",
-          expect.it("to be a function").and("to satisfy", {
-            __itReference: fakeItPlaceholder
-          })
-        ]);
-      });
-
-      it("should call the inner expect.it correctly", () => {
-        const fakeExpect = sinon.spy().named("expect");
-        fakeExpect.it = sinon
-          .stub()
-          .named("expect.it")
-          .returns(() => {});
-        const { toSomething } = createCasedFunctions(
-          fakeExpect,
-          casedDefinitions
-        );
-        toSomething("foo", fakeItPlaceholder);
-        fakeExpect.resetHistory();
-        const innerWrapper = fakeExpect.it.getCall(0).args[0];
-
-        innerWrapper("foobar");
-
-        expect(fakeExpect, "to have a call exhaustively satisfying", [
-          "foobar",
-          "the placeholder assertion",
-          "quux",
-          "xuuq"
+          expect.it("to be", fakeItPlaceholder)
         ]);
       });
     });

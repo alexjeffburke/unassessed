@@ -35,14 +35,7 @@ function createCasedFunction(
 
 function createCasedFunctionOpen(expect, __assertionString__) {
   return (subject, valueOrItPlaceholder) => {
-    let value = valueOrItPlaceholder;
-    if (value.__itPlaceholder) {
-      const { assertion, args } = valueOrItPlaceholder;
-      value = expect.it(thing => expect(thing, assertion, ...args));
-      value.__itReference = valueOrItPlaceholder;
-    }
-
-    return expect(subject, __assertionString__, value);
+    return expect(subject, __assertionString__, valueOrItPlaceholder);
   };
 }
 
