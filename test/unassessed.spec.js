@@ -387,19 +387,19 @@ describe("unassessed", () => {
   });
 
   describe('"to equal"', () => {
-    it("should allow assertion", () => {
+    it("should allow an assertion", () => {
       expect(() => {
         assess("foo").toEqual("foo");
       }, "not to throw");
     });
 
-    it("should allow negated assertion", () => {
+    it("should allow a negated assertion", () => {
       expect(() => {
         assess("foo").notToEqual("bar");
       }, "not to throw");
     });
 
-    it("should now allow a nested assertion", () => {
+    it("should allow a nested assertion", () => {
       expect(
         () => {
           assess("foo").notToEqual(assess.it.toEqual("foo"));
