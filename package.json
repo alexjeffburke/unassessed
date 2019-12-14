@@ -16,6 +16,15 @@
     "test-browser": "npm run bundle && npm run build-tests && karma start --single-run --browsers ${BROWSER:-ChromeHeadless}",
     "test-node": "npm run build && mocha"
   },
+  "files": [
+    "unassessed.js",
+    "unassessed.js.map",
+    "unassessed.esm.js",
+    "unassessed.esm.js.map",
+    "unassessed.min.js",
+    "lib",
+    "src"
+  ],
   "keywords": [],
   "author": "Alex J Burke <alex@alexjeffburke.com>",
   "repository": {
