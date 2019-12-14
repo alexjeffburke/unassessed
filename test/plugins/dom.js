@@ -1,6 +1,5 @@
-const expect = require("unexpected")
-  .clone()
-  .use(require("unexpected-dom"));
+const expect = require("unexpected");
+const unexpectedDomPlugin = require("unexpected-dom");
 
 const assess = require("../../lib/unassessed");
 
@@ -8,7 +7,7 @@ describe("plugins/dom", () => {
   let assessWithDom;
 
   beforeEach(() => {
-    assessWithDom = assess.fromInstance(expect);
+    assessWithDom = assess.withUnexpectedPlugins(unexpectedDomPlugin);
   });
 
   it("should expose assertions defined by the plugin", () => {

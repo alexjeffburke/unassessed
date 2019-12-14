@@ -380,19 +380,15 @@ describe("unassessed", () => {
     ]);
   });
 
-  describe("fromInstance()", () => {
+  describe("withUnexpectedPlugins()", () => {
     it("should support assertions", () => {
-      const newAssess = assess.fromInstance(expect.clone());
+      const newAssess = assess.withUnexpectedPlugins();
       const partialExpect = newAssess(undefined);
 
       // complete assertion to avoid afterEach() hook
       partialExpect.toBeUndefined();
 
-      expect(
-        Object.keys(partialExpect),
-        "to equal",
-        METHODS_LIST.concat(["toEqualSnapshot", "toInspectAsSnapshot"])
-      );
+      expect(Object.keys(partialExpect), "to equal", METHODS_LIST);
     });
   });
 
@@ -418,7 +414,7 @@ describe("unassessed", () => {
     });
 
     it("should not throw if valid", () => {
-      const newAssess = assess.fromInstance(expect);
+      const newAssess = assess.withUnexpectedPlugins();
 
       expect(() => {
         newAssess.setOutputWidth(100);
@@ -480,7 +476,7 @@ describe("unassessed", () => {
     });
 
     it("should render a nice diff (nested no args)", () => {
-      const assessWithWidth = assess.fromInstance(expect);
+      const assessWithWidth = assess.withUnexpectedPlugins();
       assessWithWidth.setOutputWidth(150);
 
       expect(
@@ -518,7 +514,7 @@ describe("unassessed", () => {
     });
 
     it("should render a nice diff (nested singular arg)", () => {
-      const assessWithWidth = assess.fromInstance(expect);
+      const assessWithWidth = assess.withUnexpectedPlugins();
       assessWithWidth.setOutputWidth(150);
 
       expect(
@@ -557,7 +553,7 @@ describe("unassessed", () => {
     });
 
     it("should render a nice diff (nested double arg)", () => {
-      const assessWithWidth = assess.fromInstance(expect);
+      const assessWithWidth = assess.withUnexpectedPlugins();
       assessWithWidth.setOutputWidth(150);
 
       expect(
