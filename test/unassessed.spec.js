@@ -380,6 +380,52 @@ describe("unassessed", () => {
     ]);
   });
 
+  describe("fromInstance()", () => {
+    it("should support assertions", () => {
+      const newAssess = assess.fromInstance(expect.clone());
+      const partialExpect = newAssess(undefined);
+
+      // complete assertion to avoid afterEach() hook
+      partialExpect.toBeUndefined();
+
+      expect(
+        Object.keys(partialExpect),
+        "to equal",
+        METHODS_LIST.concat(["toEqualSnapshot", "toInspectAsSnapshot"])
+      );
+    });
+  });
+
+  describe("setOutputWidth()", () => {
+    it("should throw if not a number", () => {
+      expect(
+        () => {
+          assess.setOutputWidth(null);
+        },
+        "to throw",
+        "unassessed: invalid output width"
+      );
+    });
+
+    it("should throw if less than 1", () => {
+      expect(
+        () => {
+          assess.setOutputWidth(0);
+        },
+        "to throw",
+        "unassessed: invalid output width"
+      );
+    });
+
+    it("should not throw if valid", () => {
+      const newAssess = assess.fromInstance(expect);
+
+      expect(() => {
+        newAssess.setOutputWidth(100);
+      }, "not to throw");
+    });
+  });
+
   describe('"to be truthy"', () => {
     it("should allow assertion", () => {
       expect(() => {
@@ -459,52 +505,6 @@ describe("unassessed", () => {
         "to throw",
         "expected [ 'so', 'it', 'do' ] to have an item satisfying to have length 3"
       );
-    });
-  });
-
-  describe("fromInstance()", () => {
-    it("should support assertions", () => {
-      const newAssess = assess.fromInstance(expect.clone());
-      const partialExpect = newAssess(undefined);
-
-      // complete assertion to avoid afterEach() hook
-      partialExpect.toBeUndefined();
-
-      expect(
-        Object.keys(partialExpect),
-        "to equal",
-        METHODS_LIST.concat(["toEqualSnapshot", "toInspectAsSnapshot"])
-      );
-    });
-  });
-
-  describe("setOutputWidth()", () => {
-    it("should throw if not a number", () => {
-      expect(
-        () => {
-          assess.setOutputWidth(null);
-        },
-        "to throw",
-        "unassessed: invalid output width"
-      );
-    });
-
-    it("should throw if less than 1", () => {
-      expect(
-        () => {
-          assess.setOutputWidth(0);
-        },
-        "to throw",
-        "unassessed: invalid output width"
-      );
-    });
-
-    it("should not throw if valid", () => {
-      const newAssess = assess.fromInstance(expect);
-
-      expect(() => {
-        newAssess.setOutputWidth(100);
-      }, "not to throw");
     });
   });
 });
