@@ -82,4 +82,40 @@ describe("integration/mocha", () => {
       )
     );
   });
+
+  it("should catch a dangling first assertion in afterEach", () => {
+    const testFile = path.join(
+      TESTDATA_INTEGRATION,
+      "dangling-first-assertion.js"
+    );
+
+    return expect(
+      spawnInDir(TESTDATA_INTEGRATION, MOCHA_BIN, [testFile]),
+      "to be rejected"
+    ).then(({ stdout }) =>
+      expect(
+        stdout,
+        "to contain",
+        '1) "after each" hook for "should be identified"'
+      )
+    );
+  });
+
+  it("should catch a dangling second assertion in afterEach", () => {
+    const testFile = path.join(
+      TESTDATA_INTEGRATION,
+      "dangling-second-assertion.js"
+    );
+
+    return expect(
+      spawnInDir(TESTDATA_INTEGRATION, MOCHA_BIN, [testFile]),
+      "to be rejected"
+    ).then(({ stdout }) =>
+      expect(
+        stdout,
+        "to contain",
+        '1) "after each" hook for "should be identified"'
+      )
+    );
+  });
 });
