@@ -197,6 +197,16 @@ describe("unassessed", () => {
     expect(Object.keys(partialExpect), "to equal", METHODS_LIST);
   });
 
+  it("should throw .it is called directly", () => {
+    expect(
+      () => {
+        assess.it();
+      },
+      "to throw",
+      "unassessed: asssess.it was called directly. Please use its methods instead."
+    );
+  });
+
   it("should support .it.", () => {
     const functions = assess.it;
 
