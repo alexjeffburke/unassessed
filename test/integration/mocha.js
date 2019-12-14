@@ -118,4 +118,22 @@ describe("integration/mocha", () => {
       )
     );
   });
+
+  it("should suppress afterEach error on an assertion error", () => {
+    const testFile = path.join(
+      TESTDATA_INTEGRATION,
+      "suppress-after-each-on-error.js"
+    );
+
+    return expect(
+      spawnInDir(TESTDATA_INTEGRATION, MOCHA_BIN, [testFile]),
+      "to be rejected"
+    ).then(({ stdout }) =>
+      expect(
+        stdout,
+        "not to contain",
+        '1) "after each" hook for "should be identified"'
+      ).and("to contain", "should be identified:")
+    );
+  });
 });
