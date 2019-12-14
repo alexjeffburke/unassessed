@@ -2,6 +2,9 @@
 
 This module is an extensible type-aware assertion library.
 
+[![NPM version](https://img.shields.io/npm/v/unassessed.svg)](https://www.npmjs.com/package/unassessed)
+[![Build Status](https://img.shields.io/travis/alexjeffburke/unassessed/master.svg)](https://travis-ci.org/alexjeffburke/unassessed)
+
 ## Use
 
 Unassessed can be installed simply from npm:
