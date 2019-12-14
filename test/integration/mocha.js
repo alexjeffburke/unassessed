@@ -136,4 +136,25 @@ describe("integration/mocha", () => {
       ).and("to contain", "should be identified:")
     );
   });
+
+  it("should suppress afterEach error on an assess.it call error", () => {
+    const testFile = path.join(
+      TESTDATA_INTEGRATION,
+      "suppress-after-each-on-assess-it-call.js"
+    );
+
+    return expect(
+      spawnInDir(TESTDATA_INTEGRATION, MOCHA_BIN, [testFile]),
+      "to be rejected"
+    ).then(({ stdout, stderr }) => {
+      expect(
+        stdout,
+        "not to contain",
+        '"after each" hook for "should be identified"'
+      ).and(
+        "to contain",
+        "Error: unassessed: asssess.it was called directly. Please use its methods instead."
+      );
+    });
+  });
 });
