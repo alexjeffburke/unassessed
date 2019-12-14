@@ -466,6 +466,134 @@ describe("unassessed", () => {
     });
   });
 
+  describe('"to satisfy"', () => {
+    it("should allow a nested assertion within a spec", () => {
+      expect(() => {
+        assess({
+          foo: 1,
+          bar: "quux",
+          relatedThings: ["buses", "planes", "trains"]
+        }).toSatisfy({
+          relatedThings: assess.it.notToBeEmpty()
+        });
+      }, "not to throw");
+    });
+
+    it("should render a nice diff (nested no args)", () => {
+      const assessWithWidth = assess.fromInstance(expect);
+      assessWithWidth.setOutputWidth(150);
+
+      expect(
+        () => {
+          assessWithWidth({
+            foo: 1,
+            bar: "quux",
+            relatedThings: ["buses", "planes", "trains"]
+          }).toSatisfy({
+            relatedThings: assess.it.toBeEmpty()
+          });
+        },
+        "to throw",
+        expect.it(error => {
+          const message = error.getErrorMessage("text").toString();
+
+          expect(
+            message,
+            "to equal snapshot",
+            expect.unindent`
+            expected { foo: 1, bar: 'quux', relatedThings: [ 'buses', 'planes', 'trains' ] } to satisfy { relatedThings: assess.it.toBeEmpty() }
+
+            {
+              foo: 1,
+              bar: 'quux',
+              relatedThings:
+                [ 'buses', 'planes', 'trains' ] // should satisfy assess.it.toBeEmpty()
+                                                //
+                                                // should be empty
+            }
+          `
+          );
+        })
+      );
+    });
+
+    it("should render a nice diff (nested singular arg)", () => {
+      const assessWithWidth = assess.fromInstance(expect);
+      assessWithWidth.setOutputWidth(150);
+
+      expect(
+        () => {
+          assessWithWidth({
+            foo: 1,
+            bar: "quux",
+            relatedThings: ["buses", "planes", "trains"]
+          }).toSatisfy({
+            relatedThings: assess.it.toHaveLength(1)
+          });
+        },
+        "to throw",
+        expect.it(error => {
+          const message = error.getErrorMessage("text").toString();
+
+          expect(
+            message,
+            "to equal snapshot",
+            expect.unindent`
+            expected { foo: 1, bar: 'quux', relatedThings: [ 'buses', 'planes', 'trains' ] } to satisfy { relatedThings: assess.it.toHaveLength(1) }
+
+            {
+              foo: 1,
+              bar: 'quux',
+              relatedThings:
+                [ 'buses', 'planes', 'trains' ] // should satisfy assess.it.toHaveLength(1)
+                                                //
+                                                // should have length 1
+                                                //   expected 3 to be 1
+            }
+          `
+          );
+        })
+      );
+    });
+
+    it("should render a nice diff (nested double arg)", () => {
+      const assessWithWidth = assess.fromInstance(expect);
+      assessWithWidth.setOutputWidth(150);
+
+      expect(
+        () => {
+          assessWithWidth({
+            foo: 1,
+            bar: "quux",
+            relatedThings: ["buses", "planes", "trains"]
+          }).toSatisfy({
+            foo: assess.it.toBeWithin(2, 3)
+          });
+        },
+        "to throw",
+        expect.it(error => {
+          const message = error.getErrorMessage("text").toString();
+
+          expect(
+            message,
+            "to equal snapshot",
+            expect.unindent`
+            expected { foo: 1, bar: 'quux', relatedThings: [ 'buses', 'planes', 'trains' ] } to satisfy { foo: assess.it.toBeWithin(2, 2) }
+
+            {
+              foo: 1, // should satisfy assess.it.toBeWithin(2, 2)
+                      //
+                      // should be within 2..3
+              bar: 'quux',
+              relatedThings: [ 'buses', 'planes', 'trains' ]
+            }
+          `
+          );
+        })
+      );
+    });
+  });
+
   describe('"to have items satisfying"', () => {
     it("should allow a nested singular value assertion", () => {
       expect(() => {

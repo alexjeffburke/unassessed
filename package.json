@@ -9,7 +9,7 @@
     "build": "npm run build-cf && npm run build-dts",
     "build-dts": "./scripts/generateTypescriptDefinition.js ./lib/unassessed.d.ts",
     "build-cf": "./scripts/generateCasedFunctions.js ./lib/casedFunctions.js",
-    "build-tests": "mkdirp build && buble -o build/test test",
+    "build-tests": "mkdirp build && buble --yes dangerousTaggedTemplateString -o build/test test",
     "coverage": "npm run build && nyc --exclude lib/casedFunctions.js --reporter lcov --reporter text mocha",
     "lint": "npm run build && eslint . && prettier --check '**/*.js'",
     "test": "npm run test-node && npm run test-browser",
