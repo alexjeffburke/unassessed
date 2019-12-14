@@ -8,6 +8,8 @@
 /lib/unassessed.d.ts
 /unassessed.js
 /unassessed.js.map
+/unassessed.esm.js
+/unassessed.esm.js.map
 /unassessed.min.js
 
 # VS Code User Specific Settings

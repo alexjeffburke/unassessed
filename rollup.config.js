@@ -22,6 +22,18 @@ module.exports = [
   {
     input: pkg.main,
     output: {
+      file: "unassessed.esm.js",
+      name: "unassessed",
+      exports: "default",
+      format: "esm",
+      sourcemap: true,
+      strict: false
+    },
+    plugins
+  },
+  {
+    input: pkg.main,
+    output: {
       file: "unassessed.min.js",
       name: "unassessed",
       exports: "default",
