@@ -470,7 +470,11 @@ describe("unassessed", () => {
       // complete assertion to avoid afterEach() hook
       partialExpect.toBeUndefined();
 
-      expect(Object.keys(partialExpect), "to equal", METHODS_LIST);
+      expect(
+        Object.keys(partialExpect),
+        "to equal",
+        METHODS_LIST.concat(["toEqualSnapshot", "toInspectAsSnapshot"])
+      );
     });
   });
 });

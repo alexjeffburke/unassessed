@@ -4,6 +4,7 @@ module.exports = function(config) {
 
     files: [
       "./node_modules/unexpected/unexpected.js",
+      "./node_modules/unexpected-snapshot/unexpected-snapshot-browser.js",
       "./unassessed.js",
       "./test/common/browser.js",
       "./build/test/unassessed.spec.js"
