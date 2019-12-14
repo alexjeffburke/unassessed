@@ -13,8 +13,8 @@ declare namespace unassessed {
 
     it: Matchers;
 
-    fromInstance(expect: object): Assess;
     setOutputWidth(width: number): void;
+    withUnexpectedPlugins(...plugins: object[]): Assess;
   }
 
   interface Constructable {
