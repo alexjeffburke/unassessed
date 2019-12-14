@@ -1,7 +1,7 @@
 {
   "name": "unassessed",
   "version": "0.0.0",
-  "description": "",
+  "description": "Extensible type-aware assertion library",
   "main": "lib/unassessed.js",
   "types": "lib/unassessed.d.ts",
   "scripts": {
@@ -25,7 +25,12 @@
     "lib",
     "src"
   ],
-  "keywords": [],
+  "keywords": [
+    "assertion",
+    "test",
+    "assert",
+    "testing"
+  ],
   "author": "Alex J Burke <alex@alexjeffburke.com>",
   "repository": {
     "type": "git",
