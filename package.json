@@ -12,6 +12,7 @@
     "build-tests": "mkdirp build && buble --yes dangerousTaggedTemplateString -o build/test test",
     "coverage": "npm run build && nyc --exclude lib/casedFunctions.js --reporter lcov --reporter text mocha",
     "lint": "npm run build && eslint . && prettier --check '**/*.js'",
+    "prepublishOnly": "npm run bundle",
     "test": "npm run test-node && npm run test-browser",
     "test-browser": "npm run bundle && npm run build-tests && karma start --single-run --browsers ${BROWSER:-ChromeHeadless}",
     "test-node": "npm run build && mocha"
