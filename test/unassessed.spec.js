@@ -462,7 +462,7 @@ describe("unassessed", () => {
     });
   });
 
-  describe("when creating a new instance", () => {
+  describe("fromInstance()", () => {
     it("should support assertions", () => {
       const newAssess = assess.fromInstance(expect.clone());
       const partialExpect = newAssess(undefined);
@@ -475,6 +475,36 @@ describe("unassessed", () => {
         "to equal",
         METHODS_LIST.concat(["toEqualSnapshot", "toInspectAsSnapshot"])
       );
+    });
+  });
+
+  describe("setOutputWidth()", () => {
+    it("should throw if not a number", () => {
+      expect(
+        () => {
+          assess.setOutputWidth(null);
+        },
+        "to throw",
+        "unassessed: invalid output width"
+      );
+    });
+
+    it("should throw if less than 1", () => {
+      expect(
+        () => {
+          assess.setOutputWidth(0);
+        },
+        "to throw",
+        "unassessed: invalid output width"
+      );
+    });
+
+    it("should not throw if valid", () => {
+      const newAssess = assess.fromInstance(expect);
+
+      expect(() => {
+        newAssess.setOutputWidth(100);
+      }, "not to throw");
     });
   });
 });

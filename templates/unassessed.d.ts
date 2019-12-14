@@ -14,6 +14,8 @@ declare namespace unassessed {
     fromInstance(expect: object): Assess;
 
     it: Matchers;
+
+    setOutputWidth(width: number): void;
   }
 
   interface Constructable {
