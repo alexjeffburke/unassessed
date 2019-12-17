@@ -3,7 +3,6 @@
 const fs = require("fs");
 const path = require("path");
 
-const createCasedFunctions = require("../src/createCasedFunctions");
 const prepareAssertions = require("../src/prepareAssertions");
 const processUnexpectedInstance = require("../src/processUnexpectedInstance");
 
@@ -40,9 +39,8 @@ function convertTypeIfRequired(typeName) {
 function populateTempalate(expect) {
   const assertions = prepareAssertions(expect);
   const casedDefinitions = processUnexpectedInstance(expect, assertions);
-  const casedFunctions = createCasedFunctions(expect, casedDefinitions);
 
-  const matchers = Object.keys(casedFunctions).map(key => {
+  const matchers = Object.keys(casedDefinitions).map(key => {
     const { typesOfValues } = casedDefinitions[key];
 
     if (typesOfValues.length === 0) {
