@@ -67,7 +67,7 @@ function populateTempalate(expect) {
 
 module.exports = generateTypescriptDefinition;
 
-function generateTypescriptDefinition(outputFile, pathToExpect) {
+function generateTypescriptDefinition(outputFile) {
   const expect = require("unexpected");
 
   fs.writeFileSync(
@@ -78,5 +78,5 @@ function generateTypescriptDefinition(outputFile, pathToExpect) {
 }
 
 if (require.main === module) {
-  generateTypescriptDefinition(process.argv[2], process.argv[3]);
+  generateTypescriptDefinition(process.argv[2]);
 }
