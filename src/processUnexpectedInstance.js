@@ -25,6 +25,10 @@ const ASSERTIONS_TO_EXCLUDE = {
   "when sorted numerically": true,
   "when fulfilled": true,
   "when rejected": true,
+  // "to only have properties" - only and not are mutually exclusive
+  "not to only have own properties": true,
+  "not to only have properties": true,
+  // others
   "to be ok": true,
   "not to be ok": true
 };
