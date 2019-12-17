@@ -28,6 +28,18 @@ const ASSERTIONS_TO_EXCLUDE = {
   // "to only have properties" - only and not are mutually exclusive
   "not to only have own properties": true,
   "not to only have properties": true,
+  // "to have key"
+  "to have key": true,
+  "to only have key": true,
+  "to not have key": true,
+  "to not only have key": true,
+  "not to have key": true,
+  // "to have keys"
+  "to have keys": true,
+  "to only have keys": true,
+  "to not have keys": true,
+  "to not only have keys": true,
+  "not to have keys": true,
   // others
   "to be ok": true,
   "not to be ok": true
