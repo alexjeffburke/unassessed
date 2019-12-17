@@ -14,7 +14,12 @@ declare namespace unassessed {
     it: Matchers;
 
     setOutputWidth(width: number): void;
-    withUnexpectedPlugins(...plugins: object[]): Assess;
+    withUnexpectedPlugins(...plugins: UnexpectedPlugin[]): Assess;
+  }
+
+  interface UnexpectedPlugin {
+    name: string;
+    installInto(expect: object): void;
   }
 
   interface Constructable {
