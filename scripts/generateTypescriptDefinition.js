@@ -36,10 +36,7 @@ function convertTypeIfRequired(typeName) {
   return typeName;
 }
 
-function populateTempalate(expect) {
-  const assertions = prepareAssertions(expect);
-  const casedDefinitions = processUnexpectedInstance(expect, assertions);
-
+function populateTempalate(casedDefinitions) {
   const matchers = Object.keys(casedDefinitions).map(key => {
     const { typesOfValues } = casedDefinitions[key];
 
@@ -65,17 +62,21 @@ function populateTempalate(expect) {
   return interfaceTemplate.replace("/* __matchers__ */", matcherString);
 }
 
-module.exports = generateTypescriptDefinition;
-
 function generateTypescriptDefinition(outputFile) {
   const expect = require("unexpected");
 
+  const assertions = prepareAssertions(expect);
+  const casedDefinitions = processUnexpectedInstance(expect, assertions);
+
   fs.writeFileSync(
     path.resolve(process.cwd(), outputFile),
-    populateTempalate(expect),
+    populateTempalate(casedDefinitions),
     "utf8"
   );
 }
+
+module.exports = generateTypescriptDefinition;
+module.exports.populateTempalate = populateTempalate;
 
 if (require.main === module) {
   generateTypescriptDefinition(process.argv[2]);
