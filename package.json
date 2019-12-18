@@ -42,7 +42,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "unexpected": "~11.9.0"
+    "resolve-from": "^5.0.0",
+    "unexpected": "~11.9.0",
+    "yargs": "^15.0.2"
   },
   "devDependencies": {
     "buble": "^0.19.8",

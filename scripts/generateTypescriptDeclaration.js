@@ -20,10 +20,11 @@ const TYPE_NAMES_TO_MAP = {
   regexp: "RegExp"
 };
 
-const interfaceTemplate = fs.readFileSync(
-  path.join(__dirname, "..", "templates", "unassessed.d.ts"),
-  "utf8"
-);
+const readTemplate = templateName =>
+  fs.readFileSync(
+    path.join(__dirname, "..", "templates", `${templateName}.d.ts`),
+    "utf8"
+  );
 
 function isLastChr(str, chr) {
   return str[str.length - 1] === chr;
@@ -36,7 +37,7 @@ function convertTypeIfRequired(typeName) {
   return typeName;
 }
 
-function populateTempalate(casedDefinitions) {
+function populateTempalate(casedDefinitions, templateOutput) {
   const matchers = Object.keys(casedDefinitions).map(key => {
     const { typesOfValues } = casedDefinitions[key];
 
@@ -59,25 +60,24 @@ function populateTempalate(casedDefinitions) {
 
   const matcherString = matchers.join("\n    ");
 
-  return interfaceTemplate.replace("/* __assertions__ */", matcherString);
+  return templateOutput.replace("/* __assertions__ */", matcherString);
 }
 
-function generateTypescriptDefinition(outputFile) {
-  const expect = require("unexpected");
-
+function generateTypescriptDefinition(outputFile, expect) {
   const assertions = prepareAssertions(expect);
   const casedDefinitions = processUnexpectedInstance(expect, assertions);
 
   fs.writeFileSync(
     path.resolve(process.cwd(), outputFile),
-    populateTempalate(casedDefinitions),
+    populateTempalate(casedDefinitions, readTemplate("unassessed")),
     "utf8"
   );
 }
 
 module.exports = generateTypescriptDefinition;
 module.exports.populateTempalate = populateTempalate;
+module.exports.readTemplate = readTemplate;
 
 if (require.main === module) {
-  generateTypescriptDefinition(process.argv[2]);
+  generateTypescriptDefinition(process.argv[2], require("unexpected"));
 }
