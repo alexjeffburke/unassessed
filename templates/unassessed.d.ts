@@ -9,9 +9,9 @@ declare namespace unassessed {
      *
      * @param subject What we will assert against.
      */
-    <T = any>(subject: T): Matchers;
+    <T = any>(subject: T): Assertions;
 
-    it: Matchers;
+    it: Assertions;
 
     setOutputWidth(width: number): void;
     withUnexpectedPlugins(...plugins: UnexpectedPlugin[]): Assess;
@@ -28,7 +28,7 @@ declare namespace unassessed {
 
   type Result = Promise<any> | undefined;
 
-  interface Matchers {
-    /* __matchers__ */
+  interface Assertions {
+    /* __assertions__ */
   }
 }

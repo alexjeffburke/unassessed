@@ -59,7 +59,7 @@ function populateTempalate(casedDefinitions) {
 
   const matcherString = matchers.join("\n    ");
 
-  return interfaceTemplate.replace("/* __matchers__ */", matcherString);
+  return interfaceTemplate.replace("/* __assertions__ */", matcherString);
 }
 
 function generateTypescriptDefinition(outputFile) {
