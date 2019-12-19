@@ -23,6 +23,7 @@
     "unassessed.esm.js",
     "unassessed.esm.js.map",
     "unassessed.min.js",
+    "bin",
     "lib",
     "src"
   ],
