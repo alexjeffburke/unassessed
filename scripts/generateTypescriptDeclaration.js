@@ -37,7 +37,7 @@ function convertTypeIfRequired(typeName) {
   return typeName;
 }
 
-function populateTempalate(casedDefinitions, templateOutput) {
+function populateTempalate(casedDefinitions, templateContent) {
   const matchers = Object.keys(casedDefinitions).map(key => {
     const { typesOfValues } = casedDefinitions[key];
 
@@ -60,7 +60,7 @@ function populateTempalate(casedDefinitions, templateOutput) {
 
   const matcherString = matchers.join("\n    ");
 
-  return templateOutput.replace("/* __assertions__ */", matcherString);
+  return templateContent.replace("/* __assertions__ */", matcherString);
 }
 
 function generateTypescriptDefinition(outputFile, expect) {

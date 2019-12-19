@@ -20,6 +20,11 @@ const processArgs = () =>
             type: "string",
             describe: "The output file in which to write the definition."
           })
+          .option("templateFile", {
+            alias: "template",
+            type: "string",
+            describe: "The template file in which to insert information."
+          })
     )
     .demandCommand()
     .help().argv;

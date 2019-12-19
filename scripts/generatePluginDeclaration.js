@@ -15,7 +15,8 @@ function withoutSet(set1, set2) {
   return s;
 }
 
-function generatePluginDeclaration(plugin) {
+function generatePluginDeclaration(plugin, templateContent) {
+  templateContent = templateContent || readTemplate("plugin");
   const assertions = prepareAssertions(expect);
   const casedDefinitions = processUnexpectedInstance(expect, assertions);
 
@@ -52,7 +53,7 @@ function generatePluginDeclaration(plugin) {
     pluginCasedDefinitions[fnName] = def;
   }
 
-  return populateTempalate(pluginCasedDefinitions, readTemplate("plugin"));
+  return populateTempalate(pluginCasedDefinitions, templateContent);
 }
 
 module.exports = generatePluginDeclaration;
