@@ -82,6 +82,20 @@ function determineTypesOfValues(expect, assertionString) {
   return typesOfValues;
 }
 
+function identifyTypesOfValues(typesOfValues) {
+  const maybeNested =
+    typesOfValues.length > 0 &&
+    (typesOfValues[typesOfValues.length - 1].has("assertion?") ||
+      typesOfValues[typesOfValues.length - 1].has("assertion"));
+
+  const lastTypesSet = maybeNested && typesOfValues[typesOfValues.length - 1];
+
+  return {
+    isMiddleRocket: maybeNested && lastTypesSet.size === 1,
+    isNestingAllowed: maybeNested && lastTypesSet.size > 1
+  };
+}
+
 function processUnexpectedInstance(expect, assertions) {
   const casedDefinitions = {};
 
@@ -118,22 +132,10 @@ function processUnexpectedInstance(expect, assertions) {
       return;
     }
 
-    // check whether the assertion allows a something to be nested
-    // on the RHS - is so, mark it so we generate the correct checks
-    const maybeNested =
-      typesOfValues.length > 0 &&
-      (typesOfValues[typesOfValues.length - 1].has("assertion?") ||
-        typesOfValues[typesOfValues.length - 1].has("assertion"));
-
-    const lastTypesSet = maybeNested && typesOfValues[typesOfValues.length - 1];
-    const isMiddleRocket = maybeNested && lastTypesSet.size === 1;
-    const isNestingAllowed = maybeNested && lastTypesSet.size > 1;
-
     // record all information derived for the assertion
     casedDefinitions[camelCasedString] = {
       assertionString,
-      isMiddleRocket,
-      isNestingAllowed,
+      ...identifyTypesOfValues(typesOfValues),
       typesOfValues
     };
   });
@@ -142,3 +144,4 @@ function processUnexpectedInstance(expect, assertions) {
 }
 
 module.exports = processUnexpectedInstance;
+module.exports.identifyTypesOfValues = identifyTypesOfValues;
