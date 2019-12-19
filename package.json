@@ -4,6 +4,9 @@
   "description": "Extensible type-aware assertion library",
   "main": "lib/unassessed.js",
   "types": "lib/unassessed.d.ts",
+  "bin": {
+    "unassessed-types": "./bin/unassessed-types"
+  },
   "scripts": {
     "bundle": "npm run build && rollup -c",
     "build": "npm run build-cf && npm run build-dts",
