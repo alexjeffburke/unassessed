@@ -132,10 +132,15 @@ function processUnexpectedInstance(expect, assertions) {
       return;
     }
 
+    const { isMiddleRocket, isNestingAllowed } = identifyTypesOfValues(
+      typesOfValues
+    );
+
     // record all information derived for the assertion
     casedDefinitions[camelCasedString] = {
       assertionString,
-      ...identifyTypesOfValues(typesOfValues),
+      isMiddleRocket,
+      isNestingAllowed,
       typesOfValues
     };
   });

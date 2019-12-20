@@ -1,17 +1,15 @@
 function prepareAssertions(expect) {
-  const assertions = Object.assign({}, expect.assertions);
+  const assertions = {};
   const assertionsWithNestingSuffix = {};
 
-  Object.keys(assertions).forEach(key => {
-    const value = assertions[key];
+  Object.keys(expect.assertions).forEach(key => {
+    const value = expect.assertions[key];
 
     if (key.endsWith(" assertion")) {
       assertionsWithNestingSuffix[key] = value;
-      delete assertions[key];
-      return;
+    } else {
+      assertions[key] = value;
     }
-
-    assertions[key] = value;
   });
 
   Object.keys(assertionsWithNestingSuffix).forEach(key => {
