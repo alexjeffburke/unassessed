@@ -24,7 +24,7 @@ const someValue = "foo";
 assess(someValue).notToBeEmpty();
 ```
 
-## Specs and Assertions
+## Assertions and specs
 
 The two most common used assertions are `.toEqual()` and `.toSatisfy()`.
 In their simplest forms, these allow assessing an arbitrary input against
@@ -36,7 +36,7 @@ to for the assertion to be considered passing.
 ### `.toEqual()`
 
 This assertion enforces the subject and its spec to be exactly equal. In the
-simple case, for strings we imagine that the strings should be the same:
+simple case, we imagine that the subject and value strings should be the same:
 
 ```js
 assess("foo").toEqual("foo");
@@ -61,8 +61,8 @@ assess(someObject).toEqual({
 ### `.toSatisfy()`
 
 This assertion is very similar to the equality assertion, but it permits a
-spec to mention a subset of the subjcet that must be identical for the
-assertion to be true:
+spec which mentions a subset of the subjcet that must be identical for the
+assertion to pass:
 
 ```js
 const otherObject = {
@@ -76,15 +76,15 @@ assess(otherObject).toSatisfy({
 });
 ```
 
-Notice here that we did not have to say mention the "foo" or "bar" properties
-in our spec because we are only interested in "relatedThings".
+Notice here that we did not have to say anything about the "foo" or "bar"
+properties in our spec because we are only interested in "relatedThings".
 
 #### Complex properties
 
-Sometimes we want a spec to describe a property rather than it have an absolute value.
+Sometimes we want a spec to describe a characterisrtic rather an absolute value.
 
 Imagine that, rather than "relatedThings" having a specific value, we just want to make
-sure that it isn't empty. You can use the `assess.it.` functions in this situation:
+sure that it isn't empty. You can use the `assess.it.*` functions in this situation:
 
 ```js
 assess(otherObject).toSatisfy({
@@ -116,7 +116,7 @@ subject and some spec, will check not just that their types are compatible
 but also that the assertion actually makes sense. In JavaScript, only some
 types like strings and arrays have a concept of
 
-### TypeScript typing
+### TypeScript
 
 In addition to extensive runtime validation we also ship wth a TypeScript
 definition for all assertions that are provided with the core library.
