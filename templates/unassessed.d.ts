@@ -14,7 +14,12 @@ declare namespace unassessed {
     it: Assertions;
 
     setOutputWidth(width: number): void;
+    withPlugins(...plugins: Plugin[]): Assess;
     withUnexpectedPlugins(...plugins: UnexpectedPlugin[]): Assess;
+  }
+
+  interface Plugin {
+    _unassessedPlugin: true;
   }
 
   interface UnexpectedPlugin {
