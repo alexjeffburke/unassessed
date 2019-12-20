@@ -128,11 +128,33 @@ that we are able to make - either to integrate with other testing tools
 or simply to provide more precise ways to reason about data within our
 programs is extremely important and valuable.
 
-Unassessed has been made compatible with modules authored as
+### Native plugins
+
+A number of native plugins are provided for use with Unassessed.
+Those supported alongside the core are published under an npm
+`@unassessed` namespace with a convention of a "plugin-" prefix.
+
+Native plugins ship with full TypeScript type declarations that
+augment the available assertions - plugins are activated in the
+library via the `withPlugins()` function:
+
+```js
+const assess = require("unassessed").withPlugins(
+  require("@unassessed/plugin-sinon")
+);
+
+const stub = sinon.stub();
+
+assessWithSinon(stub).wasNotCalled();
+```
+
+### Unexpected plugins
+
+Unassessed has also been made compatible with modules authored as
 [plugins for the Unexpected](http://unexpected.js.org/plugins/)
 library. When these are supplied to the `withUnexpectedPlugins()`
-a new assess function will be returned with any assertions made
-available by the plugin registered:
+any assertions they supply will be registered, but note that there
+_will not be any associated TypeScript types_.
 
 ```js
 const assess = require("unassessed");
