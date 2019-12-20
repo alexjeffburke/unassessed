@@ -20,3 +20,4 @@ matrix:
       env:
         - TARGET=test-browser
 script: npm run $TARGET
+after_success: "<coverage/lcov.info ./node_modules/coveralls/bin/coveralls.js"

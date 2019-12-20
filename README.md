@@ -4,6 +4,7 @@ This module is an extensible type-aware assertion library.
 
 [![NPM version](https://img.shields.io/npm/v/unassessed.svg)](https://www.npmjs.com/package/unassessed)
 [![Build Status](https://img.shields.io/travis/alexjeffburke/unassessed/master.svg)](https://travis-ci.org/alexjeffburke/unassessed)
+[![Coverage Status](https://img.shields.io/coveralls/alexjeffburke/unassessed/master.svg)](https://coveralls.io/r/alexjeffburke/unassessed?branch=master)
 
 ## Use
 
