@@ -13,7 +13,7 @@
     "build-dts": "./scripts/generateTypescriptDeclaration.js ./lib/unassessed.d.ts",
     "build-cf": "./scripts/generateCasedFunctions.js ./lib/casedFunctions.js",
     "build-tests": "mkdirp build && buble --yes dangerousTaggedTemplateString -o build/test test",
-    "coverage": "npm run build && nyc --exclude lib/casedFunctions.js --reporter lcov --reporter text mocha",
+    "coverage": "npm run build && nyc --exclude lib/casedFunctions.js --exclude test/utils --reporter lcov --reporter text mocha",
     "lint": "npm run build && eslint . && prettier --check '**/*.js'",
     "prepublishOnly": "npm run bundle",
     "test": "npm run test-node && npm run test-browser",
