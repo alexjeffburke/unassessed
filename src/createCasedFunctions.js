@@ -22,14 +22,20 @@ function createCasedFunction(
     };
   }
 
-  return (subject, value) => {
-    if (value.__itPlaceholder) {
+  return (subject, ...rest) => {
+    const value = rest.length === 1 ? rest[0] : undefined;
+    if (value && value.__itPlaceholder) {
       throw new Error(
         `unassessed: nested assertions are not supported by .${__camelCasedString__}()`
       );
     }
 
-    return expect(subject, __assertionString__, value);
+    // TODO: type detection may need to be extended to record
+    //       an empty argument type so we can restore being able
+    //       to enforce the number of arguments where needed
+    const args = rest.length === 1 ? [value] : [];
+
+    return expect(subject, __assertionString__, ...args);
   };
 }
 

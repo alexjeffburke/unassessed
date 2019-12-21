@@ -374,6 +374,28 @@ describe("unassessed", () => {
 
       expect(Object.keys(partialExpect), "to equal", METHODS_LIST);
     });
+
+    it("should not break with an explicit undefined value", () => {
+      const newAssess = assess.withUnexpectedPlugins(expect => {
+        expect.addAssertion("<any> to foo", () => {});
+        expect.addAssertion("<any> to foo <string>", () => {});
+      });
+
+      expect(() => {
+        newAssess(undefined).toEqual(undefined);
+      }, "not to throw");
+    });
+
+    it("should not break with an assertion with a non-value form", () => {
+      const newAssess = assess.withUnexpectedPlugins(expect => {
+        expect.addAssertion("<any> to foo", () => {});
+        expect.addAssertion("<any> to foo <string>", () => {});
+      });
+
+      expect(() => {
+        newAssess("abc").toFoo();
+      }, "not to throw");
+    });
   });
 
   describe("setOutputWidth()", () => {
