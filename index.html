@@ -1,0 +1,288 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>unassessed</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">unassessed</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> unassessed</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#unassessed" id="unassessed" style="color: inherit; text-decoration: none;">
+					<h1>Unassessed</h1>
+				</a>
+				<p>This module is an extensible type-aware assertion library.</p>
+				<p><a href="https://www.npmjs.com/package/unassessed"><img src="https://img.shields.io/npm/v/unassessed.svg" alt="NPM version"></a>
+					<a href="https://travis-ci.org/alexjeffburke/unassessed"><img src="https://img.shields.io/travis/alexjeffburke/unassessed/master.svg" alt="Build Status"></a>
+				<a href="https://coveralls.io/r/alexjeffburke/unassessed?branch=master"><img src="https://img.shields.io/coveralls/alexjeffburke/unassessed/master.svg" alt="Coverage Status"></a></p>
+				<a href="#use" id="use" style="color: inherit; text-decoration: none;">
+					<h2>Use</h2>
+				</a>
+				<p>Unassessed can be installed simply from npm:</p>
+				<pre><code>$ npm install --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span> unassessed</code></pre><p>From that point it can be imported directly into a JavaScript
+				project and used to make assertions about values:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> assess = requre(<span class="hljs-string">"unassessed"</span>);
+
+<span class="hljs-keyword">const</span> someValue = <span class="hljs-string">"foo"</span>;
+
+assess(someValue).notToBeEmpty();</code></pre>
+				<a href="#assertions-and-specs" id="assertions-and-specs" style="color: inherit; text-decoration: none;">
+					<h2>Assertions and specs</h2>
+				</a>
+				<p>The two most common used assertions are <code>.toEqual()</code> and <code>.toSatisfy()</code>.
+					In their simplest forms, these allow assessing an arbitrary input against
+					a specification which describes properties that the input value must conform
+				to for the assertion to be considered passing.</p>
+				<blockquote>
+					<p>we call the input value a <strong>&quot;subject&quot;</strong> and the specification a <strong>&quot;spec&quot;</strong></p>
+				</blockquote>
+				<a href="#codetoequalcode" id="codetoequalcode" style="color: inherit; text-decoration: none;">
+					<h3><code>.toEqual()</code></h3>
+				</a>
+				<p>This assertion enforces the subject and its spec to be exactly equal. In the
+				simple case, we imagine that the subject and value strings should be the same:</p>
+				<pre><code class="language-js">assess(<span class="hljs-string">"foo"</span>).toEqual(<span class="hljs-string">"foo"</span>);</code></pre>
+				<p>But this also extends to an object where we ensure that the subject has exactly
+					every property mentioned in the spec - they must all be present, no more and no
+				fewer, and all their types must be identical:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> someObject = {
+  <span class="hljs-attr">foo</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">bar</span>: <span class="hljs-string">"quux"</span>
+};
+
+assess(someObject).toEqual({
+  <span class="hljs-attr">foo</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">bar</span>: <span class="hljs-string">"quux"</span>
+});</code></pre>
+				<a href="#codetosatisfycode" id="codetosatisfycode" style="color: inherit; text-decoration: none;">
+					<h3><code>.toSatisfy()</code></h3>
+				</a>
+				<p>This assertion is very similar to the equality assertion, but it permits a
+					spec which mentions a subset of the subjcet that must be identical for the
+				assertion to pass:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> otherObject = {
+  <span class="hljs-attr">foo</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">bar</span>: <span class="hljs-string">"quux"</span>,
+  <span class="hljs-attr">relatedThings</span>: [<span class="hljs-string">"buses"</span>, <span class="hljs-string">"planes"</span>, <span class="hljs-string">"trains"</span>]
+};
+
+assess(otherObject).toSatisfy({
+  <span class="hljs-attr">relatedThings</span>: [<span class="hljs-string">"buses"</span>, <span class="hljs-string">"planes"</span>, <span class="hljs-string">"trains"</span>]
+});</code></pre>
+				<p>Notice here that we did not have to say anything about the &quot;foo&quot; or &quot;bar&quot;
+				properties in our spec because we are only interested in &quot;relatedThings&quot;.</p>
+				<a href="#complex-properties" id="complex-properties" style="color: inherit; text-decoration: none;">
+					<h4>Complex properties</h4>
+				</a>
+				<p>Sometimes we want a spec to describe a characterisrtic rather an absolute value.</p>
+				<p>Imagine that, rather than &quot;relatedThings&quot; having a specific value, we just want to make
+				sure that it isn&#39;t empty. You can use the <code>assess.it.*</code> functions in this situation:</p>
+				<pre><code class="language-js">assess(otherObject).toSatisfy({
+  <span class="hljs-attr">relatedThings</span>: assess.it.notToBeEmpty()
+});</code></pre>
+				<a href="#exhaustively-satisfying" id="exhaustively-satisfying" style="color: inherit; text-decoration: none;">
+					<h4>Exhaustively satisfying</h4>
+				</a>
+				<p>Now that we have seen both equality and the satisfying against descriptions of values
+					we might want to us the expressive power provided by <code>assess.it.</code> but still make sure
+				that all the properties are present.</p>
+				<p>In some ways this is coming full circle - and we provide a special &quot;exhaustively&quot;
+				variant for just this purpose:</p>
+				<pre><code class="language-js">assess(otherObject).toExhaustivelySatisfy({
+  <span class="hljs-attr">foo</span>: assess.it.toBeANumber(),
+  <span class="hljs-attr">bar</span>: assess.it.toBeAString(),
+  <span class="hljs-attr">relatedThings</span>: assess.it.toHaveLength(<span class="hljs-number">3</span>)
+});</code></pre>
+				<a href="#types-and-typing" id="types-and-typing" style="color: inherit; text-decoration: none;">
+					<h2>Types and typing</h2>
+				</a>
+				<p>Each assertion defined by the library is type aware and, when supplied a
+					subject and some spec, will check not just that their types are compatible
+					but also that the assertion actually makes sense. In JavaScript, only some
+				types like strings and arrays have a concept of</p>
+				<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+					<h3>TypeScript</h3>
+				</a>
+				<p>In addition to extensive runtime validation we also ship wth a TypeScript
+				definition for all assertions that are provided with the core library.</p>
+				<a href="#extensibility-and-plugins" id="extensibility-and-plugins" style="color: inherit; text-decoration: none;">
+					<h2>Extensibility and plugins</h2>
+				</a>
+				<p>The ability to provide extra assertions which expend the statements
+					that we are able to make - either to integrate with other testing tools
+					or simply to provide more precise ways to reason about data within our
+				programs is extremely important and valuable.</p>
+				<a href="#native-plugins" id="native-plugins" style="color: inherit; text-decoration: none;">
+					<h3>Native plugins</h3>
+				</a>
+				<p>A number of native plugins are provided for use with Unassessed.
+					Those supported alongside the core are published under an npm
+				<code>@unassessed</code> namespace with a convention of a &quot;plugin-&quot; prefix.</p>
+				<p>Native plugins ship with full TypeScript type declarations that
+					augment the available assertions - plugins are activated in the
+				library via the <code>withPlugins()</code> function:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> assess = <span class="hljs-built_in">require</span>(<span class="hljs-string">"unassessed"</span>).withPlugins(
+  <span class="hljs-built_in">require</span>(<span class="hljs-string">"@unassessed/plugin-sinon"</span>)
+);
+
+<span class="hljs-keyword">const</span> stub = sinon.stub();
+
+assessWithSinon(stub).wasNotCalled();</code></pre>
+				<a href="#unexpected-plugins" id="unexpected-plugins" style="color: inherit; text-decoration: none;">
+					<h3>Unexpected plugins</h3>
+				</a>
+				<p>Unassessed has also been made compatible with modules authored as
+					<a href="http://unexpected.js.org/plugins/">plugins for the Unexpected</a>
+					library. When these are supplied to the <code>withUnexpectedPlugins()</code>
+					any assertions they supply will be registered, but note that there
+				<em>will not be any associated TypeScript types</em>.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> assess = <span class="hljs-built_in">require</span>(<span class="hljs-string">"unassessed"</span>);
+<span class="hljs-keyword">const</span> unexpectedSinonPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">"unexpected-sinon"</span>);
+
+<span class="hljs-keyword">const</span> assessWithSinon = assess.withUnexpectedPlugins(unexpectedSinonPlugin);
+
+<span class="hljs-keyword">const</span> stub = sinon.stub();
+
+assessWithSinon(stub).wasNotCalled();</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_unassessed_d_.html">&quot;unassessed.d&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
