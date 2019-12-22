@@ -12,7 +12,10 @@ function createCasedFunction(
 
   if (typesOfValues.length === 2) {
     return (subject, value, value2) => {
-      if (value.__itPlaceholder || value2.__itPlaceholder) {
+      if (
+        (value && value.__itPlaceholder) ||
+        (value2 && value2.__itPlaceholder)
+      ) {
         throw new Error(
           `unassessed: nested assertions are not supported by .${__camelCasedString__}()`
         );

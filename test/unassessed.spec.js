@@ -396,6 +396,16 @@ describe("unassessed", () => {
         newAssess("abc").toFoo();
       }, "not to throw");
     });
+
+    it("should not break with an assertion two values given as undefined", () => {
+      const newAssess = assess.withUnexpectedPlugins(expect => {
+        expect.addAssertion("<any> to double foo <any> <any>", () => {});
+      });
+
+      expect(() => {
+        newAssess(undefined).toDoubleFoo(undefined, undefined);
+      }, "not to throw");
+    });
   });
 
   describe("setOutputWidth()", () => {
