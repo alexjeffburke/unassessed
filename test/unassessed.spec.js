@@ -364,6 +364,18 @@ describe("unassessed", () => {
     ]);
   });
 
+  describe("withPlugins()", () => {
+    it("should support plugins that attach properties", () => {
+      const thing = () => "thing";
+      const newAssess = assess.withPlugins(expect => {
+        expect.thing = thing;
+      });
+
+      expect(newAssess, "to have own properties", { thing });
+      expect(assess, "not to have own property", "thing");
+    });
+  });
+
   describe("withUnexpectedPlugins()", () => {
     it("should support assertions", () => {
       const newAssess = assess.withUnexpectedPlugins();
@@ -373,6 +385,16 @@ describe("unassessed", () => {
       partialExpect.toBeUndefined();
 
       expect(Object.keys(partialExpect), "to equal", METHODS_LIST);
+    });
+
+    it("should support plugins that attach properties", () => {
+      const thing = () => "thing";
+      const newAssess = assess.withUnexpectedPlugins(expect => {
+        expect.thing = thing;
+      });
+
+      expect(newAssess, "to have own properties", { thing });
+      expect(assess, "not to have own property", "thing");
     });
 
     it("should not break with an explicit undefined value", () => {
