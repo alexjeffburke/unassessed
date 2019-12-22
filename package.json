@@ -18,7 +18,9 @@
     "prepublishOnly": "npm run bundle",
     "test": "npm run test-node && npm run test-browser",
     "test-browser": "npm run bundle && npm run build-tests && karma start --single-run --browsers ${BROWSER:-ChromeHeadless}",
-    "test-node": "npm run build && mocha"
+    "test-node": "npm run build && mocha",
+    "site-deploy": "./node_modules/.bin/gh-pages -d documentation",
+    "site-generate": "typedoc --out ./documentation --includeDeclarations --excludeExternals ./lib"
   },
   "files": [
     "unassessed.js",
@@ -47,6 +49,7 @@
   "license": "MIT",
   "dependencies": {
     "resolve-from": "^5.0.0",
+    "typedoc": "^0.15.5",
     "unexpected": "~11.9.0",
     "yargs": "^15.0.2"
   },
@@ -61,6 +64,7 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "gh-pages": "^2.1.1",
     "karma": "^4.4.1",
     "karma-browserstack-launcher": "^1.5.1",
     "karma-chrome-launcher": "^3.1.0",

@@ -12,5 +12,8 @@
 /unassessed.esm.js.map
 /unassessed.min.js
 
+# Misc
+/documentation
+
 # VS Code User Specific Settings
 /.vscode/settings.json

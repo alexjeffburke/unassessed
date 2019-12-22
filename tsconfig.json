@@ -6,5 +6,6 @@
     "module": "commonjs",
     // The following option is set and is not overridable:
     "moduleResolution": "node"
-  }
+  },
+  "exclude": ["./templates"]
 }
