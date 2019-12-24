@@ -30,14 +30,20 @@ function isLastChr(str, chr) {
   return str[str.length - 1] === chr;
 }
 
-function convertTypeIfRequired(typeName) {
+function maybeConvertType(typeName, typeNamesToMap) {
   if (TYPE_NAMES_TO_EXCLUDE[typeName]) return "";
+  if (typeNamesToMap[typeName]) return typeNamesToMap[typeName];
   if (typeName in TYPE_NAMES_TO_MAP) typeName = TYPE_NAMES_TO_MAP[typeName];
   if (isLastChr(typeName, "?")) typeName = typeName.slice(0, -1);
   return typeName;
 }
 
-function populateTempalate(casedDefinitions, templateContent) {
+function populateTempalate(casedDefinitions, templateContent, options) {
+  options = options || {};
+
+  const convertTypeIfRequired = typeName =>
+    maybeConvertType(typeName, options.typeNamesToMap || {});
+
   const matchers = Object.keys(casedDefinitions).map(key => {
     const { typesOfValues } = casedDefinitions[key];
 

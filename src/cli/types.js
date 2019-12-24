@@ -9,11 +9,14 @@ const readTemplate = templatePath =>
 
 exports["unexpected-plugin"] = (
   cwd,
-  { name: pluginName, outputFile, templateFile }
+  { name: pluginName, outputFile, templateFile, typesMap: typeNamesToMap }
 ) => {
-  templateFile = templateFile ? readTemplate(templateFile) : null;
+  const templateContent = templateFile ? readTemplate(templateFile) : null;
   const plugin = require(resolveFrom(cwd, pluginName));
-  const output = generatePluginDeclaration(plugin, templateFile);
+  const output = generatePluginDeclaration(plugin, {
+    templateContent,
+    typeNamesToMap
+  });
 
   if (outputFile) {
     fs.writeFileSync(path.resolve(process.cwd(), outputFile), output, "utf8");

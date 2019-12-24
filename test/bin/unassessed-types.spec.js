@@ -52,5 +52,37 @@ describe("bin/unassessed-types", () => {
         expectWithPlugin("foo-bar", "to be suffixed with", "-bar");
       }, "not to throw");
     });
+
+    it("should allow overriding the the type mapping", () => {
+      return expect(
+        spawnInDir(__dirname, UNASSESSED_TYPES_BIN, [
+          "unexpected-plugin",
+          pluginModuleRequire,
+          "--typesMap",
+          '\'{ "string": "foobar" }\''
+        ]),
+        "to be fulfilled"
+      ).then(({ stdout }) =>
+        expect(
+          stdout,
+          "to equal snapshot",
+          expect.unindent`
+          import * as assess from "unassessed";
+
+          export = plugin;
+
+          declare const plugin: assess.Plugin;
+
+          declare module "unassessed" {
+            interface Assertions {
+              toBeSuffixedWith(value: foobar): Result
+            }
+          }
+
+
+          `
+        )
+      );
+    });
   });
 });

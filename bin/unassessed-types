@@ -25,6 +25,12 @@ const processArgs = () =>
             type: "string",
             describe: "The template file in which to insert information."
           })
+          .option("typesMap", {
+            coerce: JSON.parse,
+            type: "string",
+            describe:
+              "Map of type names to replace when generating definitions."
+          })
     )
     .demandCommand()
     .help().argv;
