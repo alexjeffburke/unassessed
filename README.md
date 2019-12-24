@@ -25,6 +25,11 @@ const someValue = "foo";
 assess(someValue).notToBeEmpty();
 ```
 
+## Documentation
+
+We provide a listing of all the assertions supported by the libary
+[here](https://alexjeffburke.github.io/unassessed/interfaces/_unassessed_d_.unassessed.assertions.html).
+
 ## Assertions and specs
 
 The two most common used assertions are `.toEqual()` and `.toSatisfy()`.
