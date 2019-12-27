@@ -30,6 +30,7 @@
     "unassessed.min.js",
     "bin",
     "lib",
+    "scripts",
     "src"
   ],
   "keywords": [
