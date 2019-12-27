@@ -51,7 +51,7 @@
   "license": "MIT",
   "dependencies": {
     "resolve-from": "^5.0.0",
-    "unexpected": "~11.9.0",
+    "unexpected": "~11.10.0",
     "yargs": "^15.0.2"
   },
   "devDependencies": {

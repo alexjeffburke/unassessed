@@ -15,6 +15,7 @@ const TYPE_NAMES_TO_EXCLUDE = {
 const TYPE_NAMES_TO_MAP = {
   array: "any[]",
   "array-like": "any[]",
+  BigInt: "bigint",
   binaryArray: "Uint8Array",
   function: "Constructable",
   regexp: "RegExp"

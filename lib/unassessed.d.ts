@@ -118,20 +118,20 @@ declare namespace unassessed {
     toBeFinite(): Result
     notToBeInfinite(): Result
     toBeInfinite(): Result
-    notToBeWithin(value: string|number, value2: string|number): Result
-    toBeWithin(value: string|number, value2: string|number): Result
-    notToBeLessThan(value: string|number): Result
-    notToBeBelow(value: string|number): Result
-    toBeLessThan(value: string|number): Result
-    toBeBelow(value: string|number): Result
-    notToBeLessThanOrEqualTo(value: string|number): Result
-    toBeLessThanOrEqualTo(value: string|number): Result
-    notToBeGreaterThan(value: string|number): Result
-    notToBeAbove(value: string|number): Result
-    toBeGreaterThan(value: string|number): Result
-    toBeAbove(value: string|number): Result
-    notToBeGreaterThanOrEqualTo(value: string|number): Result
-    toBeGreaterThanOrEqualTo(value: string|number): Result
+    notToBeWithin(value: string|bigint|number, value2: string|bigint|number): Result
+    toBeWithin(value: string|bigint|number, value2: string|bigint|number): Result
+    notToBeLessThan(value: string|bigint|number): Result
+    notToBeBelow(value: string|bigint|number): Result
+    toBeLessThan(value: string|bigint|number): Result
+    toBeBelow(value: string|bigint|number): Result
+    notToBeLessThanOrEqualTo(value: string|bigint|number): Result
+    toBeLessThanOrEqualTo(value: string|bigint|number): Result
+    notToBeGreaterThan(value: string|bigint|number): Result
+    notToBeAbove(value: string|bigint|number): Result
+    toBeGreaterThan(value: string|bigint|number): Result
+    toBeAbove(value: string|bigint|number): Result
+    notToBeGreaterThanOrEqualTo(value: string|bigint|number): Result
+    toBeGreaterThanOrEqualTo(value: string|bigint|number): Result
     notToBePositive(): Result
     toBePositive(): Result
     notToBeNegative(): Result
