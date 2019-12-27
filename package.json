@@ -1,6 +1,6 @@
 {
   "name": "unassessed",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Extensible type-aware assertion library",
   "main": "lib/unassessed.js",
   "types": "lib/unassessed.d.ts",
