@@ -31,7 +31,8 @@
     "bin",
     "lib",
     "scripts",
-    "src"
+    "src",
+    "templates"
   ],
   "keywords": [
     "assertion",
