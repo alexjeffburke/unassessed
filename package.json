@@ -19,8 +19,8 @@
     "test": "npm run test-node && npm run test-browser",
     "test-browser": "npm run bundle && npm run build-tests && karma start --single-run --browsers ${BROWSER:-ChromeHeadless}",
     "test-node": "npm run build && mocha",
-    "site-deploy": "gh-pages -d documentation",
-    "site-generate": "typedoc --out ./documentation --includeDeclarations --excludeExternals ./lib"
+    "site-deploy": "gh-pages -d documentation -t",
+    "site-generate": "typedoc --out ./documentation --includeDeclarations --excludeExternals ./lib && node -e \"fs.writeFileSync('documentation/.nojekyll', '')\""
   },
   "files": [
     "unassessed.js",
