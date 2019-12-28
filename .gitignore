@@ -4,8 +4,6 @@
 
 # Build
 /build
-/lib/casedFunctions.js
-/lib/unassessed.d.ts
 /unassessed.js
 /unassessed.js.map
 /unassessed.esm.js
