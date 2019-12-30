@@ -106,8 +106,8 @@ declare namespace unassessed {
     toHaveLength(value: number): Result
     notToBeEmpty(): Result
     toBeEmpty(): Result
-    notToContain(): Result
-    toContain(): Result
+    notToContain(value: any|string): Result
+    toContain(value: any|string): Result
     notToBeginWith(value: string): Result
     toBeginWith(value: string): Result
     notToStartWith(value: string): Result
