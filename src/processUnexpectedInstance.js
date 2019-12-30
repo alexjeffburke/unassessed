@@ -149,4 +149,5 @@ function processUnexpectedInstance(expect, assertions) {
 }
 
 module.exports = processUnexpectedInstance;
+module.exports.determineTypesOfValues = determineTypesOfValues;
 module.exports.identifyTypesOfValues = identifyTypesOfValues;
