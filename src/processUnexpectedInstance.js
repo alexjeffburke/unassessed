@@ -62,7 +62,7 @@ function determineTypesOfValues(expect, assertionString) {
   const typesOfValues = [];
   originalAssertion.forEach(definition => {
     const valueMatches = definition.declaration.match(
-      /(?: <([a-zA-z-]+[?]?(?:[|][a-zA-z-]+)*)>)* <([a-zA-z-]+[?]?(?:[|][a-zA-z-]+)*)>$/
+      /(?: <([a-zA-z-]+[+?]?(?:[|][a-zA-z-]+)*)>)* <([a-zA-z-]+[+?]?(?:[|][a-zA-z-]+)*)>$/
     );
     if (valueMatches) {
       const validMatches = valueMatches.slice(1).filter(Boolean);
@@ -75,7 +75,12 @@ function determineTypesOfValues(expect, assertionString) {
         } else {
           typeOfValue = typesOfValues[index];
         }
-        valueMatch.split("|").map(type => typeOfValue.add(type));
+        let matchedTypes = valueMatch.split("|");
+        // handle vararg types by treating them a single arg type
+        matchedTypes = matchedTypes.map(type =>
+          type.endsWith("+") ? type.slice(0, -1) : type
+        );
+        matchedTypes.map(type => typeOfValue.add(type));
       });
     }
   });
